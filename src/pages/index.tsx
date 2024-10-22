@@ -1,12 +1,11 @@
-import { Button } from "@/components/ui/button";
+import Layout from "@/components/Layout";
 
-const Layout = () => {
+const Home = () => {
   return (
     <div>
-      <h1>testing button</h1>
-      <Button className="bg-red-500">click me</Button>
+      <Layout />
     </div>
   );
 };
 
-export default Layout;
+export default Home;
