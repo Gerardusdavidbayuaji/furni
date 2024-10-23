@@ -1,10 +1,13 @@
+import { cn } from "@/lib/utils";
+
 interface SecondTitleProps {
   text: string;
+  className?: string;
 }
 
 const SecondTitle = (props: SecondTitleProps) => {
-  const { text } = props;
-  return <div className="font-medium text-2xl">{text}</div>;
+  const { text, className } = props;
+  return <div className={cn("font-medium text-2xl", className)}>{text}</div>;
 };
 
 export default SecondTitle;

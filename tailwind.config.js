@@ -13,10 +13,10 @@ export default {
         inter: "Inter, sans-serif",
         poppins: "Poppins, sans-serif",
       },
-      flexGrow: {
-        2: 0,
-        1: 1,
-      },
+      // flexGrow: {
+      //   2: 0,
+      //   1: 1,
+      // },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
