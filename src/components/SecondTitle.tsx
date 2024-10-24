@@ -7,7 +7,11 @@ interface SecondTitleProps {
 
 const SecondTitle = (props: SecondTitleProps) => {
   const { text, className } = props;
-  return <div className={cn("font-medium text-2xl", className)}>{text}</div>;
+  return (
+    <div className={cn("font-medium lg:text-2xl md:text-base", className)}>
+      {text}
+    </div>
+  );
 };
 
 export default SecondTitle;
