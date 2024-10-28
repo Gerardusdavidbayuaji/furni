@@ -1,5 +1,7 @@
-const Cart = () => {
-  return <div>Cart</div>;
+import Layout from "@/components/Layout";
+
+const CartPage = () => {
+  return <Layout>CartPage</Layout>;
 };
 
-export default Cart;
+export default CartPage;
