@@ -1,14 +1,15 @@
 import { navigationLinks } from "@/utils/datas/navigation";
+import { Link } from "react-router-dom";
 
 const NavLinks = () => {
   return (
-    <div className="flex gap-7 font-light">
+    <div className="hidden lg:flex gap-7 font-light ">
       {navigationLinks.map((link) => {
-        const { id, text } = link;
+        const { id, text, url } = link;
         return (
-          <p key={id} className="un cursor-pointer">
-            {text}
-          </p>
+          <Link key={id} to={url}>
+            <p className="un cursor-pointer">{text}</p>
+          </Link>
         );
       })}
     </div>

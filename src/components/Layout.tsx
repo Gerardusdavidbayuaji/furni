@@ -10,7 +10,7 @@ const Layout = (props: Props) => {
   return (
     <div className="flex flex-col h-screen font-poppins">
       <Navbar />
-      <div className="w-full grow flex flex-col bg-slate-300">{children}</div>
+      <div className="w-full grow flex flex-col bg-[#F0F2F1]">{children}</div>
     </div>
   );
 };

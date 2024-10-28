@@ -1,16 +1,31 @@
 import { LucideShoppingCart } from "lucide-react";
-import { UserIcon } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
+import DropDown from "./CustomDropDown";
 import NavLinks from "./NavLinks";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
+  const numItemInCart = 10;
+
   return (
     <header className="w-full bg-[#395C4E] sticky top-0 z-50">
       <nav className="mx-auto flex justify-between items-center text-white py-6 px-24">
-        <h1 className="font-normal text-4xl cursor-pointer">Furni.</h1>
+        <Link to="/">
+          <h1 className="font-normal text-4xl cursor-pointer">Furni.</h1>
+        </Link>
         <NavLinks />
         <div className="flex gap-5">
-          <UserIcon className="w-5 h-5 cursor-pointer" />
-          <LucideShoppingCart className="w-5 h-5 cursor-pointer" />
+          <div className="relative flex cursor-pointer">
+            <Link to="/cart">
+              <LucideShoppingCart className="w-6 h-6" />
+              <Badge className="absolute -top-2 -right-3 flex items-center justify-center rounded-full h-auto w-4 bg-[#F5C02F]">
+                <span className="text-center text-[#2B2B2B] text-xs">
+                  {numItemInCart}
+                </span>
+              </Badge>
+            </Link>
+          </div>
+          <DropDown />
         </div>
       </nav>
     </header>
