@@ -1,5 +1,7 @@
-const Checkout = () => {
-  return <div>Checkout</div>;
+import Layout from "@/components/Layout";
+
+const CheckoutPage = () => {
+  return <Layout>CheckoutPage</Layout>;
 };
 
-export default Checkout;
+export default CheckoutPage;
