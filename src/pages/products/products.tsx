@@ -2,6 +2,7 @@ import BannerProduct from "@/components/BannerProduct";
 import CategoryBox from "@/components/CategoryBox";
 import ProductCard from "@/components/ProductCard";
 import Layout from "@/components/Layout";
+import Pagination from "@/components/Pagination";
 
 const ProductsPage = () => {
   return (
@@ -11,6 +12,7 @@ const ProductsPage = () => {
           <BannerProduct />
           <CategoryBox />
           <ProductCard />
+          <Pagination />
         </div>
       </section>
     </Layout>

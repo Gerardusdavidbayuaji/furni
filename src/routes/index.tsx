@@ -1,13 +1,12 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import CheckoutPage from "@/pages/transaction/checkout";
+import DetailProduct from "@/pages/products/detailProduct";
 import ProductsPage from "@/pages/products/products";
 import OrdersPage from "@/pages/transaction/orders";
 import CartPage from "@/pages/transaction/cart";
 import LoginPage from "@/pages/auth/login";
-import Home from "@/pages";
 import NotFound from "@/pages/not-found";
-import DetailProduct from "@/components/DetailProduct";
+import Home from "@/pages";
 
 export default function Router() {
   const router = createBrowserRouter([
@@ -26,10 +25,6 @@ export default function Router() {
     {
       path: "/cart",
       element: <CartPage />,
-    },
-    {
-      path: "/checkout",
-      element: <CheckoutPage />,
     },
     {
       path: "/orders",
