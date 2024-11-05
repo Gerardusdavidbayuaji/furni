@@ -1,47 +1,32 @@
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import ThemeSubmenu from "./ThemeSubmenu";
+import Auth from "@/pages/auth/auth";
+import MenuItem from "./MenuItem";
 
 import {
-  LucideShoppingCart,
-  LucideCircleCheck,
-  PackageSearch,
-  LogOutIcon,
-  HandCoins,
-  SunMedium,
-  MoonIcon,
-  UserIcon,
-  Eclipse,
-  Orbit,
-  House,
-} from "lucide-react";
-
-import {
-  DropdownMenuSubTrigger,
-  DropdownMenuSubContent,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
   DropdownMenuContent,
-  DropdownMenuPortal,
   DropdownMenuGroup,
   DropdownMenuLabel,
-  DropdownMenuItem,
-  DropdownMenuSub,
   DropdownMenu,
 } from "@/components/ui/dropdown-menu";
 
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { useState } from "react";
+  LucideShoppingCart,
+  PackageSearch,
+  LogOutIcon,
+  HandCoins,
+  UserIcon,
+  House,
+} from "lucide-react";
 
 const DropDown = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  const handleLogoutClick = (e: any) => {
+  const handleLogoutClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsDialogOpen(true);
   };
@@ -56,65 +41,49 @@ const DropDown = () => {
           <DropdownMenuLabel>Hi, Jhon Doe</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem className="lg:hidden">
-              <House />
-              <span>Home</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="lg:hidden">
-              <PackageSearch />
-              <span>Products</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="lg:hidden">
-              <LucideShoppingCart />
-              <span>Cart</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="lg:hidden">
-              <LucideCircleCheck />
-              <span>Checkout</span>
-            </DropdownMenuItem>
-            <DropdownMenuItem className="lg:hidden">
-              <HandCoins />
-              <span>Orders</span>
-            </DropdownMenuItem>
-            <DropdownMenuSub>
-              <DropdownMenuSubTrigger>
-                <Eclipse />
-                <span>Theme</span>
-              </DropdownMenuSubTrigger>
-              <DropdownMenuPortal>
-                <DropdownMenuSubContent className="mr-2 -mt-10">
-                  <DropdownMenuItem>
-                    <SunMedium />
-                    <span>Light</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <MoonIcon />
-                    <span>Dark</span>
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Orbit />
-                    <span>System</span>
-                  </DropdownMenuItem>
-                </DropdownMenuSubContent>
-              </DropdownMenuPortal>
-            </DropdownMenuSub>
-            <DropdownMenuItem onClick={handleLogoutClick}>
-              <LogOutIcon />
-              <span>Logout</span>
-            </DropdownMenuItem>
+            <MenuItem Icon={House} label="Home" to="/" className="lg:hidden" />
+            <MenuItem
+              Icon={PackageSearch}
+              label="Products"
+              to="/products"
+              className="lg:hidden"
+            />
+            <MenuItem
+              Icon={LucideShoppingCart}
+              label="Cart"
+              to="/cart"
+              className="lg:hidden"
+            />
+            <MenuItem
+              Icon={HandCoins}
+              label="Orders"
+              to="/orders"
+              className="lg:hidden"
+            />
+            <ThemeSubmenu />
+            <MenuItem
+              Icon={LogOutIcon}
+              label="Logout"
+              onClick={handleLogoutClick}
+            />
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="w-[80%] h-[600px] mx-auto bg-[#F0F2F1]">
-          <div className="grid grid-cols-2 w-full h-full p-3">
-            <div className="bg-orange-200">test 1</div>
-            <div className="bg-orange-300 flex flex-col justify-center items-center">
-              <h1>Register Now</h1>
-              <p>
-                belum memiliki akun? <span>silahkan klik disini</span>
+        <DialogContent className="bg-[#F0F2F1] w-[80%] h-[600px] mx-auto">
+          <div className="grid lg:grid-cols-2 md:grid-cols-1 w-full h-full p-3">
+            <div className="lg:flex flex-col justify-center md:hidden">
+              <h1 className="w-80 font-semibold text-3xl leading-10">
+                Transform Your Space with Elegant Furniture.
+              </h1>
+              <p className="font-normal text-base text-[#2B2B2B]/70 mt-1">
+                Bawa kenyamanan ke rumah Anda dengan koleksi furnitur terbaru
+                kami.
               </p>
+            </div>
+            <div className="bg-[#DFE6E6] p-5 space-y-5 overflow-auto touch-pan-y rounded-lg">
+              <Auth />
             </div>
           </div>
         </DialogContent>

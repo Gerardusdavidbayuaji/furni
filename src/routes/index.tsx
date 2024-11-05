@@ -4,7 +4,6 @@ import DetailProduct from "@/pages/products/detailProduct";
 import ProductsPage from "@/pages/products/products";
 import OrdersPage from "@/pages/transaction/orders";
 import CartPage from "@/pages/transaction/cart";
-import LoginPage from "@/pages/auth/login";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages";
 
@@ -29,10 +28,6 @@ export default function Router() {
     {
       path: "/orders",
       element: <OrdersPage />,
-    },
-    {
-      path: "/login",
-      element: <LoginPage />,
     },
     {
       path: "*",
