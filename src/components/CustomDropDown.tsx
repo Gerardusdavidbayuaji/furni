@@ -28,8 +28,23 @@ import {
   DropdownMenu,
 } from "@/components/ui/dropdown-menu";
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { useState } from "react";
+
 const DropDown = () => {
-  const navigate = useNavigate();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+
+  const handleLogoutClick = (e: any) => {
+    e.stopPropagation();
+    setIsDialogOpen(true);
+  };
 
   return (
     <>
@@ -83,13 +98,27 @@ const DropDown = () => {
                 </DropdownMenuSubContent>
               </DropdownMenuPortal>
             </DropdownMenuSub>
-            <DropdownMenuItem onClick={() => navigate("/login")}>
+            <DropdownMenuItem onClick={handleLogoutClick}>
               <LogOutIcon />
               <span>Logout</span>
             </DropdownMenuItem>
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
+
+      <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+        <DialogContent className="w-[80%] h-[600px] mx-auto bg-[#F0F2F1]">
+          <div className="grid grid-cols-2 w-full h-full p-3">
+            <div className="bg-orange-200">test 1</div>
+            <div className="bg-orange-300 flex flex-col justify-center items-center">
+              <h1>Register Now</h1>
+              <p>
+                belum memiliki akun? <span>silahkan klik disini</span>
+              </p>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </>
   );
 };
