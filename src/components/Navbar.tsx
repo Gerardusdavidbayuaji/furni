@@ -9,7 +9,7 @@ const Navbar = () => {
 
   return (
     <header className="w-full bg-[#395C4E] sticky top-0 z-50">
-      <nav className="mx-auto flex justify-between items-center text-white py-6 px-24">
+      <nav className="mx-auto flex justify-between items-center text-[#FAFAFA] py-6 px-24">
         <Link to="/">
           <h1 className="font-normal text-4xl cursor-pointer">Furni.</h1>
         </Link>

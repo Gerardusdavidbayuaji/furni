@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 
 import { CustomFormField } from "../CustomFormField";
-import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Form } from "../ui/form";
+import CustomButton from "../CustomButton";
 
 const Register = () => {
   const form = useForm();
@@ -13,9 +13,9 @@ const Register = () => {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center space-y-1 text-[#2B2B2B]">
+      <div className="text-[#2B2B2B] dark:text-[#FAFAFA] flex flex-col justify-center items-center space-y-1">
         <h1 className="font-semibold text-2xl">Daftar Sekarang</h1>
-        <p className="font-normal text-base text-[#2B2B2B]/70">
+        <p className="text-[#2B2B2B]/70 dark:text-[#bfbfbb] font-normal text-base">
           Daftar untuk belanja kebutuhan Anda.
         </p>
       </div>
@@ -50,12 +50,13 @@ const Register = () => {
           </CustomFormField>
 
           <div className="flex flex-col space-y-2">
-            <Button
+            {/* <Button
               type="submit"
               className="w-full bg-[#778F86] shadow-none hover:bg-[#778F86]/80 text-[#FAFAFA]"
             >
               Register
-            </Button>
+            </Button> */}
+            <CustomButton text="Register" action="Sending..." />
           </div>
         </form>
       </Form>

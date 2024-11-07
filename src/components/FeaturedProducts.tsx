@@ -11,7 +11,7 @@ const FeaturedProducts = () => {
       <div className="grid lg:grid-cols-4 md:grid-cols-2 h-full">
         <Link to="/detail-product">
           <article className="flex flex-col justify-start md:justify-center group relative py-5">
-            <Card className="transform duration-500 mx-5 bg-[#DFE6E6]">
+            <Card className="transform duration-500 mx-5 bg-[#DFE6E6] dark:bg-[#242322]">
               <div className="relative h-60 md:h-48 w-full rounded-tr-xl rounded-tl-xl overflow-hidden">
                 <img
                   src={product1}
@@ -24,7 +24,10 @@ const FeaturedProducts = () => {
                 <h3 className="font-medium lg:text-base md:text-sm">
                   Lorem Ipsum
                 </h3>
-                <AreaText text="Rp 5.000.000" className="text-[#2B2B2B]" />
+                <AreaText
+                  text="Rp 5.000.000"
+                  className="text-[#2B2B2B] dark:text-[#FAFAFA]"
+                />
               </div>
             </Card>
           </article>
@@ -32,7 +35,7 @@ const FeaturedProducts = () => {
 
         <Link to="/detail-product">
           <article className="flex flex-col justify-start md:justify-center group relative py-5">
-            <Card className="transform duration-500 mx-5 bg-[#DFE6E6]">
+            <Card className="transform duration-500 mx-5 bg-[#DFE6E6] dark:bg-[#242322]">
               <div className="relative h-60 md:h-48 w-full rounded-tr-xl rounded-tl-xl overflow-hidden">
                 <img
                   src={product1}
@@ -45,7 +48,10 @@ const FeaturedProducts = () => {
                 <h3 className="font-medium lg:text-base md:text-sm">
                   Lorem Ipsum
                 </h3>
-                <AreaText text="Rp 5.000.000" className="text-[#2B2B2B]" />
+                <AreaText
+                  text="Rp 5.000.000"
+                  className="text-[#2B2B2B] dark:text-[#FAFAFA]"
+                />
               </div>
             </Card>
           </article>
@@ -53,7 +59,7 @@ const FeaturedProducts = () => {
 
         <Link to="/detail-product">
           <article className="flex flex-col justify-start md:justify-center group relative py-5">
-            <Card className="transform duration-500 mx-5 bg-[#DFE6E6]">
+            <Card className="transform duration-500 mx-5 bg-[#DFE6E6] dark:bg-[#242322]">
               <div className="relative h-60 md:h-48 w-full rounded-tr-xl rounded-tl-xl overflow-hidden">
                 <img
                   src={product1}
@@ -66,30 +72,39 @@ const FeaturedProducts = () => {
                 <h3 className="font-medium lg:text-base md:text-sm">
                   Lorem Ipsum
                 </h3>
-                <AreaText text="Rp 5.000.000" className="text-[#2B2B2B]" />
+                <AreaText
+                  text="Rp 5.000.000"
+                  className="text-[#2B2B2B] dark:text-[#FAFAFA]"
+                />
               </div>
             </Card>
           </article>
         </Link>
 
         <div className="flex flex-col justify-center items-end py-5 md:px-5">
-          <SecondTitle text="Crafted with" className="text-[#2B2B2B]" />
-          <SecondTitle text="excellent material." className="text-[#2B2B2B]" />
+          <SecondTitle
+            text="Crafted with"
+            className="text-[#2B2B2B] dark:text-[#FAFAFA]"
+          />
+          <SecondTitle
+            text="excellent material."
+            className="text-[#2B2B2B] dark:text-[#FAFAFA]"
+          />
           <AreaText
             text="Sed ut perspiciatis unde omnis iste"
-            className="text-[#2B2B2B]"
+            className="text-[#2B2B2B] dark:text-[#bfbfbb]"
           />
           <AreaText
             text="natus error sit voluptatem accusan"
-            className="text-[#2B2B2B]"
+            className="text-[#2B2B2B] dark:text-[#bfbfbb]"
           />
           <AreaText
             text="doloremque laudantium, totam rem"
-            className="text-[#2B2B2B] mb-4"
+            className="text-[#2B2B2B] dark:text-[#bfbfbb] mb-4"
           />
 
           <Link to="/products">
-            <Button className="rounded-full bg-[#2B2B2B] hover:bg-[#2B2B2B]/80 w-24">
+            <Button className="rounded-full bg-[#2B2B2B] hover:bg-[#2B2B2B]/80 w-24 dark:bg-[#FAFAFA] dark:hover:bg-[#FAFAFA]/80">
               Explore
             </Button>
           </Link>

@@ -15,13 +15,13 @@ const Hero = () => {
               text="Modern Interior, Design Studio"
               className="mb-2"
             />
-            <p className="font-normal lg:text-base text-white md:font-light md:text-sm">
+            <p className="font-normal lg:text-base text-[#FAFAFA] md:font-light md:text-sm">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             </p>
-            <p className="font-normal lg:text-base text-white md:font-light md:text-sm">
+            <p className="font-normal lg:text-base text-[#FAFAFA] md:font-light md:text-sm">
               eiusmod tempor incididunt ut labore et dolore magna aliqua.
             </p>
-            <p className="font-normal lg:text-base text-white md:font-light mb-4 md:text-sm">
+            <p className="font-normal lg:text-base text-[#FAFAFA] md:font-light mb-4 md:text-sm">
               Ut enim ad minim veniam, quis nostrud exercitation ullamco
             </p>
             <Button className="rounded-full bg-[#F5C02F] hover:bg-[#F5C02F]/80 text-[#2B2B2B] lg:w-24 md:w-20 md:mb-8 md:text-sm">

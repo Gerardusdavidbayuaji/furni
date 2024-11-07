@@ -17,7 +17,7 @@ const Auth = () => {
           <Login />
           <button
             onClick={toggleForm}
-            className="flex justify-center font-normal text-base text-[#2B2B2B] bg-transparent hover:bg-transparent shadow-none mt-2 w-full"
+            className="text-[#2B2B2B] dark:text-[#FAFAFA] bg-transparent hover:bg-transparent flex justify-center font-normal text-base shadow-none mt-2 w-full"
           >
             Belum memiliki akun? Silakan klik disini!
           </button>
@@ -27,7 +27,7 @@ const Auth = () => {
           <Register />
           <button
             onClick={toggleForm}
-            className="flex justify-center font-normal text-base text-[#2B2B2B] bg-transparent hover:bg-transparent shadow-none mt-2 w-full"
+            className="text-[#2B2B2B] dark:text-[#FAFAFA] bg-transparent hover:bg-transparent flex justify-center font-normal text-base shadow-none mt-2 w-full"
           >
             Sudah memiliki akun? Silakan klik disini!
           </button>

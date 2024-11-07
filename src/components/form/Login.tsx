@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 
 import { CustomFormField } from "../CustomFormField";
-import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Form } from "../ui/form";
+import CustomButton from "../CustomButton";
 
 const Login = () => {
   const form = useForm();
@@ -13,9 +13,9 @@ const Login = () => {
 
   return (
     <>
-      <div className="flex flex-col justify-center items-center space-y-1 text-[#2B2B2B]">
+      <div className="text-[#2B2B2B] dark:text-[#FAFAFA] flex flex-col justify-center items-center space-y-1">
         <h1 className="font-semibold text-2xl">Ayo Login dan Mulai Belanja</h1>
-        <p className="font-normal text-base text-[#2B2B2B]/70">
+        <p className="text-[#2B2B2B]/70 dark:text-[#bfbfbb] font-normal text-base">
           Masuk untuk melanjutkan belanja kebutuhan Anda.
         </p>
       </div>
@@ -36,12 +36,7 @@ const Login = () => {
           </CustomFormField>
 
           <div className="flex flex-col space-y-2">
-            <Button
-              type="submit"
-              className="w-full bg-[#778F86] shadow-none hover:bg-[#778F86]/80 text-[#FAFAFA]"
-            >
-              Login
-            </Button>
+            <CustomButton text="Login" action="Sending..." />
           </div>
         </form>
       </Form>
