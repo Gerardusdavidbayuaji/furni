@@ -1,14 +1,19 @@
-import { Button } from "./ui/button";
-import { useEffect, useState } from "react";
-import { IProducts } from "@/utils/apis/products";
-import { getAllProducts } from "@/utils/apis/products/api";
-import { toast } from "@/hooks/use-toast";
 import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+
+import { getAllProducts } from "@/utils/apis/products/api";
+import { IProducts } from "@/utils/apis/products";
+
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
+import { Button } from "./ui/button";
 
 const BannerProduct = () => {
   const [discountProduct, setDiscountProduct] = useState<IProducts["data"]>([]);
+  const [isManualSlide, setIsManualSlide] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [fade, setFade] = useState(true);
+  const [direction, setDirection] = useState("right");
+  const [slide, setSlide] = useState(false);
   const navigate = useNavigate();
 
   async function fetchImageProduct() {
@@ -26,20 +31,41 @@ const BannerProduct = () => {
   }
 
   const nextSlide = () => {
-    setFade(false); // Start fade-out
+    setDirection("right");
+    setSlide(true);
     setTimeout(() => {
       setCurrentIndex((prevIndex) =>
         prevIndex === discountProduct.length - 1 ? 0 : prevIndex + 1
       );
-      setFade(true); // Start fade-in
-    }, 300); // Match transition duration
+      setSlide(false);
+    }, 400);
+  };
+
+  const prevSlide = () => {
+    setDirection("left");
+    setSlide(true);
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) =>
+        prevIndex === 0 ? discountProduct.length - 1 : prevIndex - 1
+      );
+      setSlide(false);
+    }, 400);
+  };
+
+  const handleManualSlide = (direction: "left" | "right") => {
+    setIsManualSlide(true);
+    direction === "left" ? prevSlide() : nextSlide();
+    setTimeout(() => setIsManualSlide(false), 9000);
   };
 
   useEffect(() => {
     fetchImageProduct();
-    const interval = setInterval(nextSlide, 5000);
+    const interval = setInterval(() => {
+      if (!isManualSlide) nextSlide();
+    }, 9000);
+
     return () => clearInterval(interval);
-  }, [discountProduct.length]);
+  }, [discountProduct.length, isManualSlide]);
 
   const handleImageClick = () => {
     const currentProduct = discountProduct[currentIndex];
@@ -51,15 +77,42 @@ const BannerProduct = () => {
   return (
     <div className="grid min-h-[330px] w-full place-items-center overflow-hidden rounded-lg">
       {discountProduct.length > 0 && (
-        <figure className="relative object-cover object-center w-full h-[330px]">
-          <img
-            src={discountProduct[currentIndex].attributes.image}
-            alt={discountProduct[currentIndex].attributes.title}
-            className={`w-full h-full object-cover transition-opacity duration-500 ease-in-out ${
-              fade ? "opacity-100" : "opacity-0"
+        <div className="relative w-full h-[330px] overflow-hidden flex justify-center items-center">
+          <div
+            className={`flex transition-transform duration-1000 ease-in-out ${
+              slide
+                ? direction === "right"
+                  ? "-translate-x-full"
+                  : "translate-x-full"
+                : "translate-x-0"
             }`}
-          />
-        </figure>
+          >
+            <img
+              src={discountProduct[currentIndex].attributes.image}
+              alt={discountProduct[currentIndex].attributes.title}
+              className="flex min-w-full min-h-full object-contain object-center"
+            />
+            <img
+              src={
+                discountProduct[
+                  direction === "right"
+                    ? (currentIndex + 1) % discountProduct.length
+                    : (currentIndex - 1 + discountProduct.length) %
+                      discountProduct.length
+                ].attributes.image
+              }
+              alt={
+                discountProduct[
+                  direction === "right"
+                    ? (currentIndex + 1) % discountProduct.length
+                    : (currentIndex - 1 + discountProduct.length) %
+                      discountProduct.length
+                ].attributes.title
+              }
+              className="flex min-w-full min-h-full object-contain object-center"
+            />
+          </div>
+        </div>
       )}
       <figcaption className="absolute bg-white/75 rounded-tl-lg rounded-bl-lg lg:h-56 lg:w-80 md:h-52 md:w-60 flex flex-col justify-center items-center right-0 mr-24">
         <div className="space-y-1 text-[#2B2B2B]">
@@ -82,6 +135,20 @@ const BannerProduct = () => {
           </Link>
         </div>
       </figcaption>
+      <div className="absolute flex justify-center items-center bottom-0 lg:mb-[300px] md:mb-[205px] space-x-2">
+        <div
+          className="bg-[#778F86] hover:bg-[#778F86]/80 text-[#bfbfbb] dark:text-[#2B2B2B] flex justify-center items-center p-2 rounded-full w-9 h-9 cursor-pointer"
+          onClick={() => handleManualSlide("left")}
+        >
+          <ChevronLeft />
+        </div>
+        <div
+          className="bg-[#778F86] hover:bg-[#778F86]/80 text-[#bfbfbb] dark:text-[#2B2B2B] flex justify-center items-center p-2 rounded-full w-9 h-9 cursor-pointer"
+          onClick={() => handleManualSlide("right")}
+        >
+          <ChevronRight />
+        </div>
+      </div>
     </div>
   );
 };
