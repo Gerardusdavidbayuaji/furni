@@ -114,8 +114,8 @@ const BannerProduct = () => {
           </div>
         </div>
       )}
-      <figcaption className="absolute bg-white/75 rounded-tl-lg rounded-bl-lg lg:h-56 lg:w-80 md:h-52 md:w-60 flex flex-col justify-center items-center right-0 mr-24">
-        <div className="space-y-1 text-[#2B2B2B]">
+      <figcaption className="absolute bg-[#FAFAFA]/75 dark:bg-[#242322]/75 rounded-tl-lg rounded-bl-lg lg:h-56 lg:w-80 md:h-52 md:w-60 flex flex-col justify-center items-center right-0 mr-24">
+        <div className="space-y-1 text-[#2B2B2B] dark:text-[#FAFAFA]">
           <h2 className="font-semibold lg:text-4xl md:text-xl">Get Discount</h2>
           <p className="font-medium lg:text-2xl md:text-base flex items-center">
             Up to
@@ -127,7 +127,7 @@ const BannerProduct = () => {
           <p className="font-medium lg:text-2xl md:text-base">Today !</p>
           <Link to={`/detail-product/${discountProduct[currentIndex]?.id}`}>
             <Button
-              className="text-[#FAFAFA] rounded-full bg-[#2B2B2B] hover:bg-[#2B2B2B]/80 shadow-none w-auto mt-2 md:text-xs md:h-auto"
+              className="bg-[#2B2B2B] hover:bg-[#2B2B2B]/80 text-[#FAFAFA] dark:bg-[#F5C02F] dark:hover:bg-[#F5C02F]/80 dark:text-[#2B2B2B] rounded-full shadow-none w-auto mt-2 md:text-xs md:h-auto"
               onClick={handleImageClick}
             >
               Buy Now
@@ -135,15 +135,15 @@ const BannerProduct = () => {
           </Link>
         </div>
       </figcaption>
-      <div className="absolute flex justify-center items-center bottom-0 lg:mb-[300px] md:mb-[205px] space-x-2">
+      <div className="absolute flex justify-center items-center bottom-0 lg:mb-[300px] md:mb-[205px] space-x-4">
         <div
-          className="bg-[#778F86] hover:bg-[#778F86]/80 text-[#bfbfbb] dark:text-[#2B2B2B] flex justify-center items-center p-2 rounded-full w-9 h-9 cursor-pointer"
+          className="bg-[#778F86] hover:bg-[#778F86]/80 text-[#FAFAFA] flex justify-center items-center p-2 rounded-full w-9 h-9 cursor-pointer"
           onClick={() => handleManualSlide("left")}
         >
           <ChevronLeft />
         </div>
         <div
-          className="bg-[#778F86] hover:bg-[#778F86]/80 text-[#bfbfbb] dark:text-[#2B2B2B] flex justify-center items-center p-2 rounded-full w-9 h-9 cursor-pointer"
+          className="bg-[#778F86] hover:bg-[#778F86]/80 text-[#FAFAFA] flex justify-center items-center p-2 rounded-full w-9 h-9 cursor-pointer"
           onClick={() => handleManualSlide("right")}
         >
           <ChevronRight />

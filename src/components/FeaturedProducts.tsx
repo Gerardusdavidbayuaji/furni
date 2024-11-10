@@ -50,7 +50,7 @@ const FeaturedProducts = () => {
           : featuredProducts.map((product) => (
               <Link to={`/detail-product/${product.id}`} key={product.id}>
                 <article className="flex flex-col justify-start md:justify-center group relative py-5">
-                  <Card className="bg-[#DFE6E6] dark:bg-[#242322] transform duration-500 mx-5">
+                  <Card className="bg-[#DFE6E6] dark:bg-[#242322] mx-5">
                     <div className="relative h-60 md:h-48 w-full rounded-tr-xl rounded-tl-xl overflow-hidden">
                       <img
                         src={product.attributes.image}

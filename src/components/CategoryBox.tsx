@@ -5,16 +5,16 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 import {
-  Select,
   SelectContent,
-  SelectItem,
   SelectTrigger,
   SelectValue,
+  SelectItem,
+  Select,
 } from "@/components/ui/select";
 
 const CategoryBox = () => {
   return (
-    <div className="grid grid-rows-2 grid-cols-4 gap-2 p-2 lg:h-60 md:h-40 w-full rounded-lg bg-[#DFE6E6]">
+    <div className="grid grid-rows-2 grid-cols-4 gap-2 p-2 lg:h-60 md:h-40 w-full rounded-lg bg-[#DFE6E6] dark:bg-[#242322]">
       <div className="rounded-md p-2 flex justify-start items-center text-center">
         <div className="grid w-full max-w-sm gap-1.5">
           <Label htmlFor="search-product" className="text-left">
@@ -82,7 +82,7 @@ const CategoryBox = () => {
         </div>
       </div>
       <div className="rounded-md p-2 flex justify-start items-center text-center text-[#2B2B2B]">
-        <div className="w-full space-y-1.5 text-sm font-medium">
+        <div className="text-[#2B2B2B] dark:text-[#FAFAFA] w-full space-y-1.5 text-sm font-medium">
           <div className="flex justify-between">
             <p>Setting Price</p>
             <p>Rp. 16.000.000</p>
@@ -108,7 +108,7 @@ const CategoryBox = () => {
         </Button>
       </div>
       <div className="rounded-md p-2 flex justify-center items-center text-center">
-        <Button className="rounded-lg bg-[#778F86] shadow-none hover:bg-[#778F86]/80 w-40 mt-2 md:text-xs md:h-auto">
+        <Button className="rounded-lg bg-[#778F86] shadow-none hover:bg-[#778F86]/80 text-[#FAFAFA] w-40 mt-2 md:text-xs md:h-auto">
           Reset
         </Button>
       </div>
