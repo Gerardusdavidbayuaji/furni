@@ -18,7 +18,7 @@ export default function Router() {
       element: <ProductsPage />,
     },
     {
-      path: "/detail-product",
+      path: "/products/:id",
       element: <DetailProduct />,
     },
     {

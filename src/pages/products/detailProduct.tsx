@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { Separator } from "@/components/ui/separator";
-import product1 from "/assets/product-1.jpeg";
 import { ChevronRight } from "lucide-react";
 import Layout from "@/components/Layout";
+import { getDetailProduct } from "@/utils/apis/products/api";
+import { Product } from "@/utils/apis/products/types";
 
 import {
   SelectContent,
@@ -13,8 +14,37 @@ import {
   Select,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
+import { toast } from "@/hooks/use-toast";
 
 const DetailProduct = () => {
+  const { id } = useParams();
+  const [product, setProduct] = useState<Product | null>(null);
+  const [productColor, setProductColor] = useState<string | null>(null);
+
+  async function fetchData() {
+    try {
+      const response = await getDetailProduct(Number(id));
+      setProduct(response);
+
+      if (response.attributes.colors.length > 0) {
+        setProductColor(response.attributes.colors[0]);
+      }
+    } catch (error: any) {
+      toast({
+        title: "Oops! Something went wrong.",
+        description: error.toString(),
+        variant: "destructive",
+      });
+    }
+  }
+
+  useEffect(() => {
+    if (id) {
+      fetchData();
+    }
+  }, [id]);
+
   return (
     <Layout>
       <section className="flex flex-col flex-grow w-full">
@@ -32,25 +62,39 @@ const DetailProduct = () => {
           <div className="grid lg:grid-cols-2 md:grid-cols-1 md:space-y-5">
             <div className="flex justify-center items-center">
               <img
-                src={product1}
-                alt="product-test"
+                src={product?.attributes.image}
+                alt={product?.attributes.title}
                 className="lg:w-96 lg:h-full md:w-full md:h-96 object-cover rounded-lg"
               />
             </div>
             <div className="space-y-5">
               <div className="space-y-1">
-                <h1 className="font-semibold text-lg">Comfy Bed</h1>
+                <h1 className="font-semibold text-lg">
+                  {product?.attributes.title}
+                </h1>
                 <p className="font-medium text-2xl text-[#2B2B2B]">
-                  Rp 5.000.000
+                  {product?.attributes.price}
                 </p>
               </div>
 
               <div className="space-y-1">
                 <h1 className="font-medium text-base">Choose Color</h1>
                 <div className="flex space-x-2 cursor-pointer">
-                  <div className="w-5 h-5 rounded-full bg-[#5DAE8B]" />
-                  <div className="w-5 h-5 rounded-full bg-[#D9D9D9]" />
-                  <div className="w-5 h-5 rounded-full bg-[#778F86]" />
+                  {product?.attributes.colors.map((color) => {
+                    return (
+                      <Button
+                        key={color}
+                        type="button"
+                        className={`rounded-full h-8 ${
+                          color === productColor
+                            ? "border-1 border-secondary"
+                            : "h-8"
+                        }`}
+                        style={{ backgroundColor: color }}
+                        onClick={() => setProductColor(color)}
+                      />
+                    );
+                  })}
                 </div>
               </div>
 
@@ -68,14 +112,7 @@ const DetailProduct = () => {
                 </div>
                 <Separator className="bg-[#778F86] h-[1px] w-[350px]" />
                 <p className="font-normal text-sm text-[#2B2B2B] leading-relaxed mt-2">
-                  Contrary to popular belief, Lorem Ipsum is not simply random
-                  text. It has roots in a piece of classical Latin literature
-                  from 45 BC, making it over 2000 years old. Richard McClintock,
-                  a Latin professor at Hampden-Sydney College in Virginia,
-                  looked up one of the more obscure Latin words, consectetur,
-                  from a Lorem Ipsum passage, and going through the cites of the
-                  word in classical literature, discovered the undoubtable
-                  source.
+                  {product?.attributes.description}
                 </p>
               </div>
 
