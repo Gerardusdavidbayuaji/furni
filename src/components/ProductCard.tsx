@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
-import { Card } from "@/components/ui/card";
-import { getAllProducts } from "@/utils/apis/products/api";
-import { toast } from "@/hooks/use-toast";
 import { useEffect, useState } from "react";
+import { toast } from "@/hooks/use-toast";
+import { Link } from "react-router-dom";
+
+import { getAllProducts } from "@/utils/apis/products/api";
 import { IProducts } from "@/utils/apis/products";
 import { formatPrice } from "@/utils/formatter";
+
+import { Card } from "@/components/ui/card";
 import AreaText from "./AreaText";
 
 const ProductCard = () => {

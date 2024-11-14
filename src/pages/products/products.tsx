@@ -1,8 +1,10 @@
-import BannerProduct from "@/components/BannerProduct";
+// import BannerProduct from "@/components/BannerProduct";
 import CategoryBox from "@/components/CategoryBox";
 import ProductCard from "@/components/ProductCard";
-import Layout from "@/components/Layout";
 import Pagination from "@/components/Pagination";
+import Layout from "@/components/Layout";
+
+import BannerProduct from "@/__test__/BannerProductTest";
 
 const ProductsPage = () => {
   return (
