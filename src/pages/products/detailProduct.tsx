@@ -1,10 +1,9 @@
 import { Link, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-import { Separator } from "@/components/ui/separator";
-import { ChevronRight } from "lucide-react";
-import Layout from "@/components/Layout";
 import { getDetailProduct } from "@/utils/apis/products/api";
 import { Product } from "@/utils/apis/products/types";
+import { formatPrice } from "@/utils/formatter";
 
 import {
   SelectContent,
@@ -14,8 +13,9 @@ import {
   Select,
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { ChevronRight } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import Layout from "@/components/Layout";
 
 const DetailProduct = () => {
   const { id } = useParams();
@@ -51,11 +51,11 @@ const DetailProduct = () => {
         <div className="flex-grow px-24 my-7 space-y-5">
           <div className="flex font-light space-x-1">
             <Link to="/">
-              <h4>Home</h4>
+              <h4 className="text-[#2B2B2B] dark:text-[#bfbfbb]">Home</h4>
             </Link>
             <ChevronRight />
             <Link to="/products">
-              <h4>Products</h4>
+              <h4 className="text-[#2B2B2B] dark:text-[#bfbfbb]">Products</h4>
             </Link>
           </div>
 
@@ -69,26 +69,27 @@ const DetailProduct = () => {
             </div>
             <div className="space-y-5">
               <div className="space-y-1">
-                <h1 className="font-semibold text-lg">
+                <h1 className="font-medium text-lg text-[#2B2B2B] dark:text-[#FAFAFA]">
                   {product?.attributes.title}
                 </h1>
-                <p className="font-medium text-2xl text-[#2B2B2B]">
-                  {product?.attributes.price}
+                <p className="font-semibold text-2xl text-[#2B2B2B] dark:text-[#FAFAFA]">
+                  {formatPrice(product?.attributes.price)}
                 </p>
               </div>
 
               <div className="space-y-1">
-                <h1 className="font-medium text-base">Choose Color</h1>
-                <div className="flex space-x-2 cursor-pointer">
+                <h1 className="font-medium text-base text-[#2B2B2B] dark:text-[#FAFAFA]">
+                  Choose Color
+                </h1>
+                <div className="flex items-center space-x-2 cursor-pointer ">
                   {product?.attributes.colors.map((color) => {
                     return (
                       <Button
                         key={color}
-                        type="button"
-                        className={`rounded-full h-8 ${
+                        className={`rounded-full shadow-none ${
                           color === productColor
-                            ? "border-1 border-secondary"
-                            : "h-8"
+                            ? "h-8 w-8"
+                            : "h-7 w-7 border p-0"
                         }`}
                         style={{ backgroundColor: color }}
                         onClick={() => setProductColor(color)}
@@ -99,19 +100,10 @@ const DetailProduct = () => {
               </div>
 
               <div>
-                <div className="flex font-medium text-base space-x-4">
-                  <Button className="h-auto bg-[#F0F2F1] hover:bg-[#F0F2F1] un-detail text-[#2B2B2B] shadow-none">
-                    Materials
-                  </Button>
-                  <Button className="h-auto bg-[#F0F2F1] hover:bg-[#F0F2F1] un-detail text-[#2B2B2B] shadow-none">
-                    Shipping
-                  </Button>
-                  <Button className="h-auto bg-[#F0F2F1] hover:bg-[#F0F2F1] un-detail text-[#2B2B2B] shadow-none">
-                    Return Polycy
-                  </Button>
+                <div className="font-medium text-base text-[#2B2B2B] dark:text-[#FAFAFA]">
+                  Description Product
                 </div>
-                <Separator className="bg-[#778F86] h-[1px] w-[350px]" />
-                <p className="font-normal text-sm text-[#2B2B2B] leading-relaxed mt-2">
+                <p className="font-normal text-sm text-[#2B2B2B] dark:text-[#bfbfbb] leading-relaxed mt-1">
                   {product?.attributes.description}
                 </p>
               </div>

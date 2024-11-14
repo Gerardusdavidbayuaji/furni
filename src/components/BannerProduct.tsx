@@ -125,7 +125,7 @@ const BannerProduct = () => {
             off
           </p>
           <p className="font-medium lg:text-2xl md:text-base">Today !</p>
-          <Link to={`/detail-product/${discountProduct[currentIndex]?.id}`}>
+          <Link to={`/products/${discountProduct[currentIndex]?.id}`}>
             <Button
               className="bg-[#2B2B2B] hover:bg-[#2B2B2B]/80 text-[#FAFAFA] dark:bg-[#F5C02F] dark:hover:bg-[#F5C02F]/80 dark:text-[#2B2B2B] rounded-full shadow-none w-auto mt-2 md:text-xs md:h-auto"
               onClick={handleImageClick}
