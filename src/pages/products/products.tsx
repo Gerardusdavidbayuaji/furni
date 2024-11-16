@@ -4,8 +4,6 @@ import ProductCard from "@/components/ProductCard";
 import Pagination from "@/components/Pagination";
 import Layout from "@/components/Layout";
 
-// import BannerProduct from "@/__test__/BannerProductTest";
-
 const ProductsPage = () => {
   return (
     <Layout>
