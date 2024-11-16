@@ -15,7 +15,7 @@ import { Product } from "@/utils/apis/products/types";
 
 const BannerProduct = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const plugin = useRef(Autoplay({ delay: 5000, stopOnInteraction: true }));
+  const plugin = useRef(Autoplay({ delay: 3000, stopOnInteraction: true }));
 
   useEffect(() => {
     const fetchProducts = async () => {
