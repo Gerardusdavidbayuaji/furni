@@ -9,9 +9,24 @@ export const getFeaturedProducts = async () => {
   }
 };
 
-export const getAllProducts = async () => {
+export const getAllProducts = async (params?: Record<string, any>) => {
   try {
-    const response = await axiosWithConfig.get(`/products`);
+    let query = "";
+
+    if (params) {
+      const queryParams: string[] = [];
+
+      for (const key in params) {
+        if (params[key] !== undefined && params[key] !== null) {
+          queryParams.push(`${key}=${encodeURIComponent(params[key])}`);
+        }
+      }
+
+      query = queryParams.join("&");
+    }
+
+    const url = query ? `/products?${query}` : "/products";
+    const response = await axiosWithConfig.get(url);
     return response.data;
   } catch (error: any) {
     throw Error(error.response.data.message);

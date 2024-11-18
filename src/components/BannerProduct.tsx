@@ -40,7 +40,6 @@ const BannerProduct = () => {
       <CarouselContent>
         {products.map((product) => (
           <CarouselItem key={product.id} className="relative">
-            {/* Gambar bergerak di dalam container */}
             <div className="grid min-h-[330px] w-full place-items-center overflow-hidden rounded-lg">
               <figure className="relative w-full h-[330px] overflow-hidden flex justify-center items-center">
                 <img
@@ -51,7 +50,6 @@ const BannerProduct = () => {
               </figure>
             </div>
 
-            {/* figcaption tetap di posisi tetap */}
             <figcaption className="absolute bg-[#FAFAFA]/75 dark:bg-[#242322]/75 rounded-tl-lg rounded-bl-lg lg:h-56 lg:w-80 md:h-52 md:w-60 flex flex-col justify-center items-center right-0 top-1/2 transform -translate-y-1/2">
               <div className="space-y-1 text-[#2B2B2B] dark:text-[#FAFAFA]">
                 <h2 className="font-semibold lg:text-4xl md:text-xl">

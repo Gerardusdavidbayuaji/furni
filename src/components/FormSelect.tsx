@@ -10,7 +10,7 @@ import {
 interface propsSelect {
   label: string;
   name: string;
-  list?: string[];
+  list: { value: string; label: string }[];
   defaultValue: string;
 }
 
@@ -28,10 +28,10 @@ const FormSelect = (props: propsSelect) => {
             <SelectValue placeholder={defaultValue} />
           </SelectTrigger>
           <SelectContent>
-            {list?.map((item) => {
+            {list.map((item) => {
               return (
-                <SelectItem key={item} value={item}>
-                  {item}
+                <SelectItem key={item.value} value={item.value}>
+                  {item.label}
                 </SelectItem>
               );
             })}
