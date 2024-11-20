@@ -11,7 +11,7 @@ const ProductsPage = () => {
 
   const handleSearch = (newFilters: any) => {
     setFilters(newFilters);
-    setPage(1); // Reset to first page after search
+    setPage(1);
   };
 
   return (
@@ -23,7 +23,7 @@ const ProductsPage = () => {
           <ProductContainer filters={filters} page={page} />
           <Pagination
             currentPage={page}
-            totalPages={10}
+            totalPages={3}
             onPageChange={setPage}
           />
         </div>
