@@ -3,16 +3,17 @@ import { Checkbox } from "./ui/checkbox";
 interface propsCheckbox {
   label: string;
   name: string;
-  defaultValue: boolean;
+  checked: boolean;
+  onChange: (e: React.FormEvent<HTMLButtonElement>) => void;
 }
 
 const FormCheckbox = (props: propsCheckbox) => {
-  const { label, name, defaultValue } = props;
+  const { label, name, checked, onChange } = props;
 
   return (
     <div className="rounded-md p-2 flex flex-col justify-center items-center text-center space-y-1.5">
       <p className="text-sm font-medium">{label}</p>
-      <Checkbox name={name} defaultChecked={defaultValue} />
+      <Checkbox name={name} checked={checked} onChange={onChange} />
     </div>
   );
 };

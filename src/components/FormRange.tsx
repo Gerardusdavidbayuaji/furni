@@ -6,11 +6,13 @@ interface propsRange {
   name: string;
   maxPrice: number;
   step: number;
+  value: number;
+  onChange: (value: number) => void;
 }
 
 const FormRange = (props: propsRange) => {
   const [selectedPrice, setSelectedPrice] = useState(0);
-  const { name, maxPrice, step } = props;
+  const { name, maxPrice, step, value } = props;
 
   const handleSliderChange = (value: number[]) => {
     setSelectedPrice(value[0]);
@@ -24,7 +26,7 @@ const FormRange = (props: propsRange) => {
           <p>{formatPrice(selectedPrice.toString())}</p>
         </div>
         <Slider
-          defaultValue={[0]}
+          value={[value]}
           max={maxPrice}
           step={step}
           onValueChange={handleSliderChange}

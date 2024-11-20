@@ -9,13 +9,20 @@ import { formatPrice } from "@/utils/formatter";
 import { Card } from "@/components/ui/card";
 import AreaText from "./AreaText";
 
-const ProductContainer = () => {
+const ProductContainer = ({
+  filters,
+  page,
+}: {
+  filters: any;
+  page: number;
+}) => {
   const [allProduct, setAllProduct] = useState<IProducts["data"]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   async function fetchAllProduct() {
     try {
-      const result = await getAllProducts();
+      const params = { ...filters, page, limit: 10 };
+      const result = await getAllProducts(params);
       const response = result.data;
       setAllProduct(response);
     } catch (error: any) {
@@ -31,7 +38,7 @@ const ProductContainer = () => {
 
   useEffect(() => {
     fetchAllProduct();
-  }, []);
+  }, [filters, page]);
 
   return (
     <>

@@ -3,10 +3,16 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { getAllProducts } from "@/utils/apis/products/api";
 import { useEffect, useState } from "react";
 
-const Pagination = () => {
-  const [currentPage, setCurrentPage] = useState(1);
+const Pagination = ({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}) => {
   const [products, setProducts] = useState<any[]>([]);
-  const [totalPages, setTotalPages] = useState(1);
 
   const fetchProducts = async (page: number) => {
     const params = { page, limit: 10 };
@@ -14,7 +20,7 @@ const Pagination = () => {
     try {
       const response = await getAllProducts(params);
       setProducts(response.data);
-      setTotalPages(Math.ceil(response.meta.total / 10));
+      // setTotalPages(Math.ceil(response.meta.total / 10));
     } catch (error) {
       console.log("error fetching products", error);
     }
@@ -24,15 +30,19 @@ const Pagination = () => {
     fetchProducts(currentPage);
   }, [currentPage]);
 
+  useEffect(() => {
+    fetchProducts(currentPage);
+  }, [currentPage]);
+
   const handleNextPage = () => {
     if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
+      onPageChange(currentPage + 1);
     }
   };
 
   const handlePrevPage = () => {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+      onPageChange(currentPage - 1);
     }
   };
 
