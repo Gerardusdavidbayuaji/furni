@@ -9,27 +9,42 @@ export const getFeaturedProducts = async () => {
   }
 };
 
+// export const getAllProducts = async (params?: Record<string, any>) => {
+//   try {
+//     let query = "";
+
+//     if (params) {
+//       const queryParams: string[] = [];
+
+//       for (const key in params) {
+//         if (params[key] !== undefined && params[key] !== null) {
+//           queryParams.push(`${key}=${encodeURIComponent(params[key])}`);
+//         }
+//       }
+
+//       query = queryParams.join("&");
+//     }
+
+//     const url = query ? `/products?${query}` : "/products";
+//     const response = await axiosWithConfig.get(url);
+//     return response.data;
+//   } catch (error: any) {
+//     throw Error(error.response.data.message);
+//   }
+// };
+
 export const getAllProducts = async (params?: Record<string, any>) => {
   try {
-    let query = "";
+    const query = Object.entries(params || {})
+      .filter(([_, value]) => value !== "" && value !== null && value !== 0)
+      .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
+      .join("&");
 
-    if (params) {
-      const queryParams: string[] = [];
-
-      for (const key in params) {
-        if (params[key] !== undefined && params[key] !== null) {
-          queryParams.push(`${key}=${encodeURIComponent(params[key])}`);
-        }
-      }
-
-      query = queryParams.join("&");
-    }
-
-    const url = query ? `/products?${query}` : "/products";
+    const url = query ? `/products?${query}` : `/products`;
     const response = await axiosWithConfig.get(url);
     return response.data;
   } catch (error: any) {
-    throw Error(error.response.data.message);
+    throw Error(error.response?.data?.message || "Error fetching products");
   }
 };
 

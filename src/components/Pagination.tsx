@@ -15,18 +15,18 @@ const Pagination = ({
 }) => {
   const [, setProducts] = useState<any[]>([]);
 
+  const fetchProducts = async (page: number) => {
+    const params = { page, limit: 10 };
+
+    try {
+      const response = await getAllProducts(params);
+      setProducts(response.data);
+    } catch (error) {
+      console.log("error fetching products", error);
+    }
+  };
+
   useEffect(() => {
-    const fetchProducts = async (page: number) => {
-      const params = { page, limit: 10 };
-
-      try {
-        const response = await getAllProducts(params);
-        setProducts(response.data);
-      } catch (error) {
-        console.log("error fetching products", error);
-      }
-    };
-
     fetchProducts(currentPage);
   }, [currentPage]);
 

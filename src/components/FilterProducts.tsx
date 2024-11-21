@@ -4,7 +4,6 @@ import FormSelect from "./FormSelect";
 import FormInput from "./FormInput";
 import FormRange from "./FormRange";
 import { Link } from "react-router-dom";
-
 import { getAllProducts } from "@/utils/apis/products/api";
 import { useEffect, useState } from "react";
 
@@ -22,6 +21,7 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
     company: "",
     price: 0,
     freeShipping: false,
+    sort: "",
   });
 
   useEffect(() => {
@@ -52,26 +52,41 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
           )
         );
       } catch (error) {
-        console.log("error fetch products:", error);
+        console.log("Error fetching products:", error);
       }
     };
 
     fetchData();
-  });
+  }, []);
 
   const handleSearch = () => {
+    // Trigger search with the final filter state
     onSearch(filters);
   };
 
   const handleReset = () => {
-    setFilters({
+    const resetFilters = {
       search: "",
       category: "",
       company: "",
       price: 0,
       freeShipping: false,
-    });
-    onSearch({});
+      sort: "",
+    };
+    setFilters(resetFilters);
+    onSearch(resetFilters); // Reset the search criteria in the parent
+  };
+
+  const handleChange = (field: string, value: any) => {
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      [field]: value,
+    }));
+
+    // Optional: Trigger search on typing for real-time search
+    if (field === "search") {
+      onSearch({ ...filters, [field]: value });
+    }
   };
 
   return (
@@ -81,30 +96,32 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
         name="search"
         label="Search Product"
         value={filters.search}
-        onChange={(e) => setFilters({ ...filters, search: e.target.value })}
+        onChange={(e) => handleChange("search", e.target.value)}
       />
       <FormSelect
         label="Select Category"
         name="category"
         value={filters.category}
-        onValueChange={(value) => setFilters({ ...filters, category: value })}
+        onValueChange={(value) => handleChange("category", value)}
         list={categories}
       />
       <FormSelect
         label="Select Company"
         name="company"
         value={filters.company}
-        onValueChange={(value) => setFilters({ ...filters, company: value })}
+        onValueChange={(value) => handleChange("company", value)}
         list={companies}
       />
       <FormSelect
         label="Sort Product"
-        name="sort-product"
+        name="sort"
+        value={filters.sort}
+        onValueChange={(value) => handleChange("sort", value)}
         list={[
-          { value: "a-z", label: "A-Z" },
-          { value: "z-a", label: "Z-A" },
-          { value: "price-low", label: "Price: Low to High" },
-          { value: "price-high", label: "Price: High to Low" },
+          { value: "name-asc", label: "A-Z" },
+          { value: "name-desc", label: "Z-A" },
+          { value: "price-asc", label: "Low to High" },
+          { value: "price-desc", label: "High to Low" },
         ]}
       />
 
@@ -113,7 +130,7 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
         maxPrice={maxPrice}
         value={filters.price}
         step={1}
-        onChange={(price) => setFilters({ ...filters, price })}
+        onChange={(value) => handleChange("price", value)}
       />
 
       <FormCheckbox
@@ -121,10 +138,7 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
         name="free-shipping"
         checked={filters.freeShipping}
         onChange={(e) =>
-          setFilters({
-            ...filters,
-            freeShipping: (e.target as HTMLInputElement).checked,
-          })
+          handleChange("freeShipping", (e.target as HTMLInputElement).checked)
         }
       />
 
@@ -151,3 +165,5 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
 };
 
 export default Filter;
+
+// filter pada search, sort, freeshipping

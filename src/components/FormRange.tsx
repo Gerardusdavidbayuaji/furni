@@ -16,6 +16,7 @@ const FormRange = (props: propsRange) => {
 
   const handleSliderChange = (value: number[]) => {
     setSelectedPrice(value[0]);
+    props.onChange(value[0]); // Notify the parent with the updated price
   };
 
   return (
