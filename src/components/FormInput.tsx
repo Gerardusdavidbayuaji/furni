@@ -7,10 +7,11 @@ interface propsSearch {
   label: string;
   value: string; // Menambahkan 'value' ke dalam interface
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  defaultValue: string;
 }
 
 const FormInput = (props: propsSearch) => {
-  const { id, name, label } = props;
+  const { id, name, label, defaultValue } = props;
 
   return (
     <div className="rounded-md p-2 flex justify-start items-center text-center">
@@ -21,6 +22,7 @@ const FormInput = (props: propsSearch) => {
         <Input
           type={name}
           id={id}
+          placeholder={defaultValue}
           className="h-[39px] rounded-lg outline outline-1 outline-[#778F86] focus:outline-2 focus:outline-[#778F86]"
         />
       </div>

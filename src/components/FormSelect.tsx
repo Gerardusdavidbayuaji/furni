@@ -13,10 +13,11 @@ interface propsSelect {
   list: { value: string; label: string }[];
   value?: string;
   onValueChange?: (value: string) => void;
+  defaultValue: string;
 }
 
 const FormSelect = (props: propsSelect) => {
-  const { label, name, list, value, onValueChange } = props;
+  const { label, name, list, value, onValueChange, defaultValue } = props;
 
   return (
     <div className="rounded-md p-2 flex justify-start items-center text-center text-[#2B2B2B]">
@@ -26,7 +27,7 @@ const FormSelect = (props: propsSelect) => {
         </Label>
         <Select value={value} onValueChange={onValueChange}>
           <SelectTrigger className="w-full outline outline-1 outline-[#778F86] focus:outline-2 focus:outline-[#778F86]">
-            <SelectValue placeholder={value} />
+            <SelectValue placeholder={defaultValue} />
           </SelectTrigger>
           <SelectContent>
             {list.map((item) => {

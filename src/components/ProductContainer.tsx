@@ -1,11 +1,9 @@
 import { useEffect, useState } from "react";
 import { toast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
-
 import { getAllProducts } from "@/utils/apis/products/api";
 import { IProducts } from "@/utils/apis/products";
 import { formatPrice } from "@/utils/formatter";
-
 import { Card } from "@/components/ui/card";
 import AreaText from "./AreaText";
 
@@ -21,7 +19,7 @@ const ProductContainer = ({
 
   async function fetchAllProduct() {
     try {
-      const params = { ...filters, page, limit: 10 };
+      const params = { ...filters, page, limit: 10 }; // Add pagination and filters
       const result = await getAllProducts(params);
       const response = result.data;
       setAllProduct(response);
@@ -37,7 +35,7 @@ const ProductContainer = ({
   }
 
   useEffect(() => {
-    fetchAllProduct();
+    fetchAllProduct(); // Re-fetch products when filters or page change
   }, [filters, page]);
 
   return (

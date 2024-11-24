@@ -1,11 +1,10 @@
 import { Button } from "@/components/ui/button";
+import { useEffect, useState } from "react";
 import FormCheckbox from "./FormCheckbox";
 import FormSelect from "./FormSelect";
 import FormInput from "./FormInput";
 import FormRange from "./FormRange";
-import { Link } from "react-router-dom";
 import { getAllProducts } from "@/utils/apis/products/api";
-import { useEffect, useState } from "react";
 
 const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
   const [categories, setCategories] = useState<
@@ -60,7 +59,6 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
   }, []);
 
   const handleSearch = () => {
-    // Trigger search with the final filter state
     onSearch(filters);
   };
 
@@ -74,18 +72,14 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
       sort: "",
     };
     setFilters(resetFilters);
-    onSearch(resetFilters); // Reset the search criteria in the parent
+    onSearch(resetFilters);
   };
 
   const handleChange = (field: string, value: any) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [field]: value,
-    }));
-
-    // Optional: Trigger search on typing for real-time search
+    const updatedFilters = { ...filters, [field]: value };
+    setFilters(updatedFilters);
     if (field === "search") {
-      onSearch({ ...filters, [field]: value });
+      onSearch(updatedFilters);
     }
   };
 
@@ -97,6 +91,7 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
         label="Search Product"
         value={filters.search}
         onChange={(e) => handleChange("search", e.target.value)}
+        defaultValue="Search Product . . ."
       />
       <FormSelect
         label="Select Category"
@@ -104,6 +99,7 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
         value={filters.category}
         onValueChange={(value) => handleChange("category", value)}
         list={categories}
+        defaultValue="All"
       />
       <FormSelect
         label="Select Company"
@@ -111,6 +107,7 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
         value={filters.company}
         onValueChange={(value) => handleChange("company", value)}
         list={companies}
+        defaultValue="All"
       />
       <FormSelect
         label="Sort Product"
@@ -123,8 +120,8 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
           { value: "price-asc", label: "Low to High" },
           { value: "price-desc", label: "High to Low" },
         ]}
+        defaultValue="A-Z"
       />
-
       <FormRange
         name="Price Range"
         maxPrice={maxPrice}
@@ -132,7 +129,6 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
         step={1}
         onChange={(value) => handleChange("price", value)}
       />
-
       <FormCheckbox
         label="Free Shipping"
         name="free-shipping"
@@ -141,7 +137,6 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
           handleChange("freeShipping", (e.target as HTMLInputElement).checked)
         }
       />
-
       <div className="rounded-md p-2 flex justify-center items-center text-center">
         <Button
           onClick={handleSearch}
@@ -151,19 +146,15 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
         </Button>
       </div>
       <div className="rounded-md p-2 flex justify-center items-center text-center">
-        <Link to="/products">
-          <Button
-            onClick={handleReset}
-            className="rounded-lg bg-[#778F86] shadow-none hover:bg-[#778F86]/80 text-[#FAFAFA] w-40 mt-2 md:text-xs md:h-auto"
-          >
-            Reset
-          </Button>
-        </Link>
+        <Button
+          onClick={handleReset}
+          className="rounded-lg bg-[#778F86] shadow-none hover:bg-[#778F86]/80 text-[#FAFAFA] w-40 mt-2 md:text-xs md:h-auto"
+        >
+          Reset
+        </Button>
       </div>
     </div>
   );
 };
 
 export default Filter;
-
-// filter pada search, sort, freeshipping

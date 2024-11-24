@@ -6,12 +6,12 @@ import Layout from "@/components/Layout";
 import { useState } from "react";
 
 const ProductsPage = () => {
-  const [filters, setFilters] = useState<any>({});
+  const [filters, setFilters] = useState<any>({ search: "" });
   const [page, setPage] = useState(1);
 
-  const handleSearch = (newFilters: any) => {
+  const handleSearch = async (newFilters: any) => {
     setFilters(newFilters);
-    setPage(1);
+    setPage(1); // Reset page to 1 on new search
   };
 
   return (
@@ -23,7 +23,7 @@ const ProductsPage = () => {
           <ProductContainer filters={filters} page={page} />
           <Pagination
             currentPage={page}
-            totalPages={3}
+            totalPages={3} // Update totalPages as needed
             onPageChange={setPage}
           />
         </div>
