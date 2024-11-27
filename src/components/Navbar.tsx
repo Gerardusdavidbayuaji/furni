@@ -1,11 +1,20 @@
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
 import { LucideShoppingCart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import DropDown from "./CustomDropDown";
 import NavLinks from "./NavLinks";
-import { Link } from "react-router-dom";
+import { CartState } from "@/utils/apis/products";
+
+interface RootState {
+  cartState: CartState;
+}
 
 const Navbar = () => {
-  const numItemInCart = 10;
+  const numItemsInCart = useSelector(
+    (state: RootState) => state.cartState?.numItemsInCart ?? 0
+  );
 
   return (
     <header className="w-full bg-[#395C4E] sticky top-0 z-50">
@@ -20,7 +29,7 @@ const Navbar = () => {
               <LucideShoppingCart className="w-6 h-6" />
               <Badge className="absolute -top-2 -right-3 flex items-center justify-center rounded-full h-auto w-4 bg-[#F5C02F]">
                 <span className="text-center text-[#2B2B2B] text-xs">
-                  {numItemInCart}
+                  {numItemsInCart}
                 </span>
               </Badge>
             </Link>
