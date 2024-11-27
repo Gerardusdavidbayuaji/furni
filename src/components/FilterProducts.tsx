@@ -20,7 +20,7 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
     company: "",
     price: 0,
     freeShipping: false,
-    sort: "",
+    sort: "name-asc", // Default sort: A-Z
   });
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
           )
         );
       } catch (error) {
-        console.log("Error fetching products:", error);
+        console.error("Error fetching products:", error);
       }
     };
 
@@ -69,7 +69,7 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
       company: "",
       price: 0,
       freeShipping: false,
-      sort: "",
+      sort: "name-asc", // Reset to default sort A-Z
     };
     setFilters(resetFilters);
     onSearch(resetFilters);
@@ -78,7 +78,9 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
   const handleChange = (field: string, value: any) => {
     const updatedFilters = { ...filters, [field]: value };
     setFilters(updatedFilters);
-    if (field === "search") {
+
+    // Apply filters immediately for real-time updates
+    if (field === "search" || field === "freeShipping" || field === "sort") {
       onSearch(updatedFilters);
     }
   };
@@ -117,8 +119,6 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
         list={[
           { value: "name-asc", label: "A-Z" },
           { value: "name-desc", label: "Z-A" },
-          { value: "price-asc", label: "Low to High" },
-          { value: "price-desc", label: "High to Low" },
         ]}
         defaultValue="A-Z"
       />
