@@ -1,4 +1,4 @@
-export const formatPrice = (price: string | undefined): string => {
+export const formatPrice = (price: any | undefined): string => {
   if (price !== undefined) {
     const numericPrice = parseInt(price, 10);
     return numericPrice.toLocaleString("id-ID", {

@@ -1,8 +1,18 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import CartItem from "./CartItem";
+import { CartState } from "@/utils/apis/products";
+import { useSelector } from "react-redux";
+
+interface RootState {
+  cartState: CartState;
+}
 
 const CartItemList = () => {
+  const cartItems = useSelector(
+    (state: RootState) => state.cartState.cartItems || []
+  );
+
   return (
     <div className="col-span-2 space-y-4">
       {/* heading cart */}
@@ -22,7 +32,9 @@ const CartItemList = () => {
       </div>
 
       {/* item cart list */}
-      <CartItem />
+      {cartItems.map((item) => (
+        <CartItem key={item.cartID} cartItem={item} />
+      ))}
     </div>
   );
 };

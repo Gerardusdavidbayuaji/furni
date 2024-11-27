@@ -45,7 +45,7 @@ const cartSlice = createSlice({
       localStorage.setItem("cart", JSON.stringify(state));
     },
 
-    editIem: (
+    editItem: (
       state,
       action: PayloadAction<{ id: number; quantity: number }>
     ) => {
@@ -79,6 +79,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { clearCart, addItem, removeItem, editIem } = cartSlice.actions;
+export const { clearCart, addItem, removeItem, editItem } = cartSlice.actions;
 
 export default cartSlice.reducer;
