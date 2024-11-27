@@ -1,8 +1,11 @@
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
 import { getDetailProduct } from "@/utils/apis/products/api";
+import { CartItem } from "@/utils/apis/products/types";
 import { Product } from "@/utils/apis/products/types";
+import { addItem } from "@/utils/store/cartSlice";
 import { formatPrice } from "@/utils/formatter";
 
 import {
@@ -21,25 +24,60 @@ const DetailProduct = () => {
   const { id } = useParams();
   const [product, setProduct] = useState<Product | null>(null);
   const [productColor, setProductColor] = useState<string | null>(null);
+  const [amount, setAmount] = useState<number>(1);
 
-  async function fetchData() {
-    try {
-      const response = await getDetailProduct(Number(id));
-      setProduct(response);
+  const dispatch = useDispatch();
 
-      if (response.attributes.colors.length > 0) {
-        setProductColor(response.attributes.colors[0]);
-      }
-    } catch (error: any) {
+  const addToCart = () => {
+    if (!product || !productColor) {
       toast({
-        title: "Oops! Something went wrong.",
-        description: error.toString(),
+        title: "Oops! Failed to add to cart",
+        description: "Please select a product and color",
         variant: "destructive",
       });
+      return;
     }
-  }
+
+    const cartProduct: CartItem = {
+      id: product.id,
+      cartID: `${product.id}-${productColor}`,
+      productID: product.id || 0,
+      image: product.attributes.image || "",
+      title: product.attributes.title || "Unknown Product",
+      price: product.attributes.price || "0",
+      amount,
+      quantity: amount,
+      productColor,
+      company: product.attributes.company || "Unknown Company",
+    };
+
+    dispatch(addItem(cartProduct));
+
+    toast({
+      title: "Success! Happy shopping",
+      description: "Your item has been added to the cart",
+      variant: "default",
+    });
+  };
 
   useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await getDetailProduct(Number(id));
+        setProduct(response);
+
+        if (response.attributes.colors.length > 0) {
+          setProductColor(response.attributes.colors[0]);
+        }
+      } catch (error: any) {
+        toast({
+          title: "Oops! Something went wrong.",
+          description: error.toString(),
+          variant: "destructive",
+        });
+      }
+    }
+
     if (id) {
       fetchData();
     }
@@ -109,17 +147,25 @@ const DetailProduct = () => {
               </div>
 
               <div className="flex justify-end items-end space-x-2">
-                <Select>
+                <Select
+                  onValueChange={(value) => setAmount(Number(value))}
+                  defaultValue="1"
+                >
                   <SelectTrigger className="w-14 outline outline-1 outline-[#778F86] focus:outline-2 focus:outline-[#778F86]">
                     <SelectValue placeholder="1" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="1">1</SelectItem>
-                    <SelectItem value="2">2</SelectItem>
-                    <SelectItem value="3">3</SelectItem>
+                    {[1, 2, 3, 4, 5].map((num) => (
+                      <SelectItem key={num} value={String(num)}>
+                        {num}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
-                <Button className="bg-[#FABD05] hover:bg-[#FABD05]/80 text-[#2B2B2B] shadow-none">
+                <Button
+                  className="bg-[#FABD05] hover:bg-[#FABD05]/80 text-[#2B2B2B] shadow-none"
+                  onClick={addToCart}
+                >
                   Add to Cart
                 </Button>
               </div>

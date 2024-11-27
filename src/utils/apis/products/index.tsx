@@ -1,5 +1,5 @@
 import { getFeaturedProducts, getAllProducts, getDetailProduct } from "./api";
-import { IProducts } from "./types";
+import { IProducts, CartItem, CartState } from "./types";
 
 export default { getFeaturedProducts, getAllProducts, getDetailProduct };
-export type { IProducts };
+export type { IProducts, CartItem, CartState };

@@ -12,7 +12,7 @@ export const getFeaturedProducts = async () => {
 export const getAllProducts = async (params?: Record<string, any>) => {
   try {
     const query = Object.entries(params || {})
-      .filter(([_, value]) => value !== "" && value !== null && value !== 0)
+      .filter(([, value]) => value !== "" && value !== null && value !== 0)
       .map(([key, value]) => `${key}=${encodeURIComponent(value)}`)
       .join("&");
 

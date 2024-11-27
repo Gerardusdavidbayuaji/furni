@@ -1,20 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface CartItem {
-  id: number;
-  title: string;
-  price: number;
-  quantity: number;
-}
-
-export interface CartState {
-  cartItems: CartItem[];
-  numItemsInCart: number;
-  cartTotal: number;
-  shipping: number;
-  tax: number;
-  orderTotal: number;
-}
+import { CartItem, CartState } from "../apis/products";
 
 const defaultState: CartState = {
   cartItems: [],
@@ -37,7 +22,8 @@ const cartSlice = createSlice({
     addItem: (state, action: PayloadAction<CartItem>) => {
       state.cartItems.push(action.payload);
       state.numItemsInCart += 1;
-      state.cartTotal += action.payload.price * action.payload.quantity;
+      state.cartTotal +=
+        parseFloat(action.payload.price) * action.payload.quantity;
     },
     removeItem: (state, action: PayloadAction<number>) => {
       state.cartItems = state.cartItems.filter(
@@ -52,9 +38,9 @@ const cartSlice = createSlice({
         (item) => item.id === action.payload.id
       );
       if (item) {
-        state.cartTotal -= item.price * item.quantity;
+        state.cartTotal -= parseFloat(item.price) * item.quantity;
         item.quantity = action.payload.quantity;
-        state.cartTotal += item.price * item.quantity;
+        state.cartTotal += parseFloat(item.price) * item.quantity;
       }
     },
   },

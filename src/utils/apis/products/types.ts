@@ -35,3 +35,25 @@ export interface IProducts {
   data: Product[];
   meta: MetaData;
 }
+
+export interface CartItem {
+  id: number;
+  cartID: string;
+  productID: number;
+  image: string;
+  title: string;
+  price: string;
+  amount: number;
+  quantity: number;
+  productColor: string | null;
+  company: string;
+}
+
+export interface CartState {
+  cartItems: CartItem[];
+  numItemsInCart: number;
+  cartTotal: number;
+  shipping: number;
+  tax: number;
+  orderTotal: number;
+}
