@@ -1,28 +1,27 @@
+import { useDispatch } from "react-redux";
+
+import { removeItem, editItem } from "@/utils/store/cartSlice";
+import { ICartItem } from "@/utils/apis/products";
+import { formatPrice } from "@/utils/formatter";
+
+import { Trash2Icon, MinusIcon, PlusIcon } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Trash2Icon, MinusIcon, PlusIcon } from "lucide-react";
-
-import { formatPrice } from "@/utils/formatter";
-import { removeItem, editItem } from "@/utils/store/cartSlice";
-import { useDispatch } from "react-redux";
-import type { CartItem as CartItemType } from "@/utils/apis/products";
 
 interface CartItemProps {
-  cartItem: CartItemType; // Define the type for the cartItem prop
+  cartItem: ICartItem;
 }
 
 const CartItem = ({ cartItem }: CartItemProps) => {
   const dispatch = useDispatch();
 
-  // Fungsi hapus item
   const removeItemFromCart = () => {
-    const cartID = parseInt(cartItem.cartID); // Konversi ke number jika diperlukan
+    const cartID = parseInt(cartItem.cartID);
     dispatch(removeItem(cartID));
   };
 
-  // Fungsi ubah jumlah
   const handleAmountChange = (newAmount: number) => {
-    const cartID = parseInt(cartItem.cartID); // Konversi ke number jika diperlukan
+    const cartID = parseInt(cartItem.cartID);
     dispatch(editItem({ id: cartID, quantity: newAmount }));
   };
 
@@ -30,7 +29,6 @@ const CartItem = ({ cartItem }: CartItemProps) => {
     cartItem;
   return (
     <div key={cartID} className="bg-[#DFE6E6] w-full p-5 rounded-lg">
-      {/* Checkbox dan Nama Perusahaan */}
       <div className="flex items-center space-x-2">
         <Checkbox id={`select-item-${cartID}`} />
         <label
@@ -41,10 +39,8 @@ const CartItem = ({ cartItem }: CartItemProps) => {
         </label>
       </div>
 
-      {/* Detail Item */}
       <div className="ml-7 mt-2">
         <div className="flex justify-between space-x-4">
-          {/* Gambar dan Detail */}
           <div className="flex space-x-2">
             <img
               src={image}
@@ -63,13 +59,11 @@ const CartItem = ({ cartItem }: CartItemProps) => {
             </div>
           </div>
 
-          {/* Harga, Jumlah, dan Aksi */}
           <div className="grid justify-between">
             <h1 className="text-base font-medium text-[#2B2B2B] text-end">
               {formatPrice(price)}
             </h1>
             <div className="flex items-center space-x-2">
-              {/* Tombol Hapus */}
               <Button
                 className="bg-[#DFE6E6] hover:bg-[#FABD05] p-2 rounded-full"
                 onClick={removeItemFromCart}
@@ -77,7 +71,6 @@ const CartItem = ({ cartItem }: CartItemProps) => {
                 <Trash2Icon className="text-[#395C4E]" />
               </Button>
 
-              {/* Kontrol Jumlah */}
               <div className="flex items-center space-x-2 p-1 border rounded-md">
                 <Button
                   className="bg-[#DFE6E6] hover:bg-[#FABD05] p-1 rounded-full"

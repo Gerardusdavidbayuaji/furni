@@ -36,7 +36,7 @@ export interface IProducts {
   meta: MetaData;
 }
 
-export interface CartItem {
+export interface ICartItem {
   id: number;
   cartID: string;
   productID: number;
@@ -50,7 +50,7 @@ export interface CartItem {
 }
 
 export interface CartState {
-  cartItems: CartItem[];
+  cartItems: ICartItem[];
   numItemsInCart: number;
   cartTotal: number;
   shipping: number;

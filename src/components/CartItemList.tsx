@@ -1,21 +1,18 @@
+import { useSelector } from "react-redux";
+
+import { RootState } from "@/utils/store/store";
+
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import CartItem from "./CartItem";
-import { CartState } from "@/utils/apis/products";
-import { useSelector } from "react-redux";
-
-interface RootState {
-  cartState: CartState;
-}
 
 const CartItemList = () => {
   const cartItems = useSelector(
-    (state: RootState) => state.cartState.cartItems || []
+    (state: RootState) => state.cart.cartItems || []
   );
 
   return (
     <div className="col-span-2 space-y-4">
-      {/* heading cart */}
       <div className="bg-[#DFE6E6] w-full p-5 rounded-lg flex justify-between">
         <div className="flex items-center space-x-2">
           <Checkbox id="select_all" className="shadow-none" />
@@ -31,7 +28,6 @@ const CartItemList = () => {
         </Button>
       </div>
 
-      {/* item cart list */}
       {cartItems.map((item) => (
         <CartItem key={item.cartID} cartItem={item} />
       ))}

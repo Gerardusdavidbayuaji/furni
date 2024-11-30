@@ -1,24 +1,16 @@
-import { Button } from "./ui/button";
-import { formatPrice } from "@/utils/formatter";
-import { CartState } from "@/utils/apis/products";
 import { useSelector } from "react-redux";
 
-interface RootState {
-  cartState: CartState;
-}
+import { RootState } from "@/utils/store/store";
+import { formatPrice } from "@/utils/formatter";
+
+import { Button } from "./ui/button";
 
 const CartTotal = () => {
   const user = true;
-  // const { cartTotal, shipping, tax, orderTotal } = useSelector(
-  //   (state: RootState) => state.cartState
-  // );
 
-  const {
-    cartTotal = 2,
-    shipping = 3,
-    tax = 2,
-    orderTotal = 2,
-  } = useSelector((state: RootState) => state.cartState || {});
+  const { cartTotal, shipping, tax, orderTotal } = useSelector(
+    (state: RootState) => state.cart || {}
+  );
 
   return (
     <div className="bg-[#DFE6E6] text-[#2B2B2B] p-5 h-60 rounded-lg space-y-2 text-base font-medium">

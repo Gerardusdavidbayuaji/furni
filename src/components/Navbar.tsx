@@ -1,20 +1,27 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
+
+import { RootState } from "@/utils/store/store";
 
 import { LucideShoppingCart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import DropDown from "./CustomDropDown";
 import NavLinks from "./NavLinks";
-import { CartState } from "@/utils/apis/products";
-
-interface RootState {
-  cartState: CartState;
-}
 
 const Navbar = () => {
   const numItemsInCart = useSelector(
-    (state: RootState) => state.cartState?.numItemsInCart ?? 0
+    (state: RootState) => state.cart?.numItemsInCart ?? 0
   );
+
+  const cartItems = useSelector(
+    (state: RootState) => state.cart?.cartItems ?? []
+  );
+
+  useEffect(() => {
+    console.log("numItemsInCart:", numItemsInCart);
+    console.log("cartItems:", cartItems);
+  }, [numItemsInCart, cartItems]);
 
   return (
     <header className="w-full bg-[#395C4E] sticky top-0 z-50">

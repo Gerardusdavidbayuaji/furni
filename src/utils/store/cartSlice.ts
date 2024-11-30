@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CartItem, CartState } from "../apis/products";
+import { ICartItem, CartState } from "../apis/products";
 
 const defaultState: CartState = {
   cartItems: [],
@@ -20,7 +20,7 @@ const cartSlice = createSlice({
   name: "cart",
   initialState: getCartFromLocalStorage(),
   reducers: {
-    addItem: (state, action: PayloadAction<CartItem>) => {
+    addItem: (state, action: PayloadAction<ICartItem>) => {
       const { price, quantity, cartID } = action.payload;
 
       const item = state.cartItems.find((i) => i.cartID === cartID);
@@ -36,7 +36,6 @@ const cartSlice = createSlice({
       cartSlice.caseReducers.calculateTotals(state);
       localStorage.setItem("cart", JSON.stringify(state));
     },
-
     removeItem: (state, action: PayloadAction<number>) => {
       state.cartItems = state.cartItems.filter(
         (item) => item.id !== action.payload
@@ -80,5 +79,4 @@ const cartSlice = createSlice({
 });
 
 export const { clearCart, addItem, removeItem, editItem } = cartSlice.actions;
-
 export default cartSlice.reducer;

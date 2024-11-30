@@ -1,17 +1,12 @@
-// import { CartState } from "@/utils/apis/products";
+import { RootState } from "@/utils/store/store";
+import { useSelector } from "react-redux";
 
 import CartItemList from "@/components/CartItemList";
 import CartTotal from "@/components/CartTotal";
 import Layout from "@/components/Layout";
-import { CartState } from "@/utils/apis/products";
-import { useSelector } from "react-redux";
-
-interface RootState {
-  cartState: CartState;
-}
 
 const CartPage = () => {
-  const cartState = useSelector((state: RootState) => state.cartState);
+  const cartState = useSelector((state: RootState) => state.cart);
   const numItemsInCart = cartState?.numItemsInCart ?? 0;
 
   if (numItemsInCart === 0) {

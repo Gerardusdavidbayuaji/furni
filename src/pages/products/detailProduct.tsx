@@ -1,9 +1,9 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 
 import { getDetailProduct } from "@/utils/apis/products/api";
-import { CartItem } from "@/utils/apis/products/types";
+import { ICartItem } from "@/utils/apis/products/types";
 import { Product } from "@/utils/apis/products/types";
 import { addItem } from "@/utils/store/cartSlice";
 import { formatPrice } from "@/utils/formatter";
@@ -15,6 +15,7 @@ import {
   SelectItem,
   Select,
 } from "@/components/ui/select";
+import { RootState } from "@/utils/store/store";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
@@ -38,10 +39,10 @@ const DetailProduct = () => {
       return;
     }
 
-    const cartProduct: CartItem = {
+    const cartProduct: ICartItem = {
       id: product.id,
       cartID: `${product.id}-${productColor}`,
-      productID: product.id || 0,
+      productID: product.id,
       image: product.attributes.image || "",
       title: product.attributes.title || "Unknown Product",
       price: product.attributes.price || "0",
@@ -65,7 +66,6 @@ const DetailProduct = () => {
       try {
         const response = await getDetailProduct(Number(id));
         setProduct(response);
-
         if (response.attributes.colors.length > 0) {
           setProductColor(response.attributes.colors[0]);
         }
@@ -82,6 +82,11 @@ const DetailProduct = () => {
       fetchData();
     }
   }, [id]);
+
+  const cartItems = useSelector((state: RootState) => state.cart.cartItems);
+  useEffect(() => {
+    console.log("cart item:", cartItems);
+  }, [cartItems]);
 
   return (
     <Layout>
@@ -120,20 +125,18 @@ const DetailProduct = () => {
                   Choose Color
                 </h1>
                 <div className="flex items-center space-x-2 cursor-pointer ">
-                  {product?.attributes.colors.map((color) => {
-                    return (
-                      <Button
-                        key={color}
-                        className={`rounded-full shadow-none ${
-                          color === productColor
-                            ? "h-8 w-8"
-                            : "h-7 w-7 border p-0"
-                        }`}
-                        style={{ backgroundColor: color }}
-                        onClick={() => setProductColor(color)}
-                      />
-                    );
-                  })}
+                  {product?.attributes.colors.map((color) => (
+                    <Button
+                      key={color}
+                      className={`rounded-full shadow-none ${
+                        color === productColor
+                          ? "h-8 w-8"
+                          : "h-7 w-7 border p-0"
+                      }`}
+                      style={{ backgroundColor: color }}
+                      onClick={() => setProductColor(color)}
+                    />
+                  ))}
                 </div>
               </div>
 
