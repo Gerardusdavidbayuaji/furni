@@ -20,7 +20,7 @@ const CartItemList = () => {
             htmlFor="select_all"
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-[#2B2B2B]"
           >
-            Select All
+            Select All <span>({cartItems.length})</span>
           </label>
         </div>
         <Button className="flex text-end text-sm font-semibold text-[#395C4E] bg-transparent hover:bg-transparent shadow-none px-0">

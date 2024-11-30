@@ -10,12 +10,13 @@ import DropDown from "./CustomDropDown";
 import NavLinks from "./NavLinks";
 
 const Navbar = () => {
-  const numItemsInCart = useSelector(
-    (state: RootState) => state.cart?.numItemsInCart ?? 0
-  );
-
   const cartItems = useSelector(
     (state: RootState) => state.cart?.cartItems ?? []
+  );
+
+  const numItemsInCart = cartItems.reduce(
+    (total, cartItem) => total + cartItem.quantity,
+    0
   );
 
   useEffect(() => {

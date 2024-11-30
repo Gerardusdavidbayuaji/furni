@@ -9,7 +9,7 @@ const CartTotal = () => {
   const user = true;
 
   const { cartTotal, shipping, tax, orderTotal } = useSelector(
-    (state: RootState) => state.cart || {}
+    (state: RootState) => state.cart
   );
 
   return (

@@ -36,35 +36,48 @@ const cartSlice = createSlice({
       cartSlice.caseReducers.calculateTotals(state);
       localStorage.setItem("cart", JSON.stringify(state));
     },
+
     removeItem: (state, action: PayloadAction<number>) => {
-      state.cartItems = state.cartItems.filter(
-        (item) => item.id !== action.payload
-      );
-      cartSlice.caseReducers.calculateTotals(state);
-      localStorage.setItem("cart", JSON.stringify(state));
+      const item = state.cartItems.find((i) => i.id === action.payload);
+      if (item) {
+        state.cartItems = state.cartItems.filter(
+          (item) => item.id !== action.payload
+        );
+        state.numItemsInCart -= item.quantity;
+        state.cartTotal -= parseFloat(item.price) * item.quantity;
+
+        cartSlice.caseReducers.calculateTotals(state);
+        localStorage.setItem("cart", JSON.stringify(state));
+      }
     },
 
     editItem: (
       state,
       action: PayloadAction<{ id: number; quantity: number }>
     ) => {
-      const item = state.cartItems.find(
-        (item) => item.id === action.payload.id
-      );
+      const { id, quantity } = action.payload;
+      const item = state.cartItems.find((item) => item.id === id);
 
       if (item) {
-        state.cartTotal -= parseFloat(item.price) * item.quantity;
-        item.quantity = action.payload.quantity;
-        state.cartTotal += parseFloat(item.price) * item.quantity;
-      }
+        const oldQuantity = item.quantity;
+        item.quantity = quantity;
 
-      cartSlice.caseReducers.calculateTotals(state);
-      localStorage.setItem("cart", JSON.stringify(state));
+        state.numItemsInCart += quantity - oldQuantity;
+        state.cartTotal += (quantity - oldQuantity) * parseFloat(item.price);
+
+        cartSlice.caseReducers.calculateTotals(state);
+        localStorage.setItem("cart", JSON.stringify(state));
+      }
     },
 
     calculateTotals: (state) => {
+      state.cartTotal = state.cartItems.reduce(
+        (total, item) => total + parseFloat(item.price) * item.quantity,
+        0
+      );
       state.tax = 0.1 * state.cartTotal;
       state.orderTotal = state.cartTotal + state.shipping + state.tax;
+      localStorage.setItem("cart", JSON.stringify(state));
     },
 
     clearCart: (state) => {
