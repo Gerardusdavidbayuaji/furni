@@ -13,24 +13,26 @@ const CartTotal = () => {
   );
 
   return (
-    <div className="bg-[#DFE6E6] text-[#2B2B2B] p-5 h-60 rounded-lg space-y-2 text-base font-medium">
+    <div className="bg-[#DFE6E6] dark:bg-[#242322] text-[#2B2B2B] dark:text-[#FAFAFA] p-5 h-60 rounded-lg space-y-2 text-base font-medium">
       <h1 className="mt-1">Shopping Summary</h1>
       <div className=" space-y-2">
-        <div className="flex justify-between">
-          <h4 className="text-sm font-normal">Sub total</h4>
-          <h2>{formatPrice(cartTotal)}</h2>
+        <div className="flex justify-between text-sm font-normal">
+          <h2>Sub total</h2>
+          <p>{formatPrice(cartTotal)}</p>
         </div>
-        <div className="flex justify-between">
-          <h4 className="text-sm font-normal">Shipping</h4>
-          <h2>{formatPrice(shipping)}</h2>
+        <div className="flex justify-between text-sm font-normal">
+          <h2>Shipping</h2>
+          <p>{formatPrice(shipping)}</p>
         </div>
-        <div className="flex justify-between">
-          <h4 className="text-sm font-normal">Tax</h4>
-          <h2>{formatPrice(tax)}</h2>
+        <div className="flex justify-between text-sm font-normal">
+          <h2>Tax</h2>
+          <p>{formatPrice(tax)}</p>
         </div>
-        <div className="flex justify-between">
-          <h4 className="text-sm font-normal">Orders total</h4>
-          <h2 className="text-[#395C4E]">{formatPrice(orderTotal)}</h2>
+        <div className="flex justify-between text-sm font-normal">
+          <h2>Orders total</h2>
+          <p className="text-[#778F86] text-base font-medium">
+            {formatPrice(orderTotal)}
+          </p>
         </div>
       </div>
       {user ? (

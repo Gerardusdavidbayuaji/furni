@@ -7,17 +7,25 @@ import { formatPrice } from "@/utils/formatter";
 import { Trash2Icon, MinusIcon, PlusIcon } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/hooks/use-toast";
 
 interface CartItemProps {
   cartItem: ICartItem;
+  isChecked: boolean;
+  onCheckChange: (id: number) => void;
 }
 
-const CartItem = ({ cartItem }: CartItemProps) => {
+const CartItem = ({ cartItem, isChecked, onCheckChange }: CartItemProps) => {
   const dispatch = useDispatch();
 
   const handleRemoveItem = () => {
     const cartID = parseInt(cartItem.cartID);
     dispatch(removeItem(cartID));
+    toast({
+      title: "Success removed item",
+      description: "Item removed from cart",
+      variant: "destructive",
+    });
   };
 
   const handleAmountChange = (newAmount: number) => {
@@ -25,13 +33,25 @@ const CartItem = ({ cartItem }: CartItemProps) => {
     dispatch(editItem({ id: cartItem.id, quantity: newAmount }));
   };
 
+  const handleCheckBoxChange = () => {
+    onCheckChange(cartItem.id);
+  };
+
   return (
-    <div key={cartItem.id} className="bg-[#DFE6E6] w-full p-5 rounded-lg">
+    <div
+      key={cartItem.id}
+      className="bg-[#DFE6E6] dark:bg-[#242322] w-full p-5 rounded-lg"
+    >
       <div className="flex items-center space-x-2">
-        <Checkbox id={`select-item-${cartItem.id}`} />
+        <Checkbox
+          id={`select-item-${cartItem.id}`}
+          checked={isChecked}
+          onCheckedChange={handleCheckBoxChange}
+          className="shadow-none"
+        />
         <label
           htmlFor={`select-item-${cartItem.id}`}
-          className="text-sm font-medium text-[#2B2B2B]"
+          className="text-sm font-medium text-[#2B2B2B] dark:text-[#FAFAFA]"
         >
           {cartItem.company}
         </label>
@@ -60,32 +80,32 @@ const CartItem = ({ cartItem }: CartItemProps) => {
           </div>
 
           <div className="grid justify-between">
-            <h1 className="text-base font-medium text-[#2B2B2B] text-end">
+            <h1 className="text-base font-normal text-[#2B2B2B] dark:text-[#FAFAFA] text-end">
               {formatPrice(cartItem.price)}
             </h1>
             <div className="flex items-center space-x-2">
               <Button
-                className="bg-[#DFE6E6] hover:bg-[#FABD05] p-2 rounded-full"
+                className="bg-[#DFE6E6] dark:bg-[#242322] hover:bg-[#778F86] hover:dark:bg-[#778F86] p-0 h-8 w-8 rounded-md shadow-none"
                 onClick={handleRemoveItem}
               >
-                <Trash2Icon className="text-[#395C4E]" />
+                <Trash2Icon className="text-[#2B2B2B] dark:text-[#FAFAFA]" />
               </Button>
 
-              <div className="flex items-center space-x-2 p-1 border rounded-md">
+              <div className="flex items-center space-x-2 p-1 border border-spacing-1 border-[#2B2B2B] rounded-md">
                 <Button
-                  className="bg-[#DFE6E6] hover:bg-[#FABD05] p-1 rounded-full"
+                  className="bg-[#DFE6E6] dark:bg-[#242322] hover:bg-[#778F86] hover:dark:bg-[#778F86] p-0 h-8 w-8 rounded-md shadow-none"
                   onClick={() => handleAmountChange(cartItem.quantity - 1)}
                 >
-                  <MinusIcon className="text-[#2B2B2B]" />
+                  <MinusIcon className="text-[#2B2B2B] dark:text-[#FAFAFA]" />
                 </Button>
-                <p className="text-base font-medium text-[#2B2B2B]">
+                <p className="text-sm font-normal text-[#2B2B2B] dark:text-[#FAFAFA] w-4 flex justify-center text-center">
                   {cartItem.quantity}
                 </p>
                 <Button
-                  className="bg-[#DFE6E6] hover:bg-[#FABD05] p-1 rounded-full"
+                  className="bg-[#DFE6E6] dark:bg-[#242322] hover:bg-[#778F86] hover:dark:bg-[#778F86] p-0 h-8 w-8 rounded-md shadow-none"
                   onClick={() => handleAmountChange(cartItem.quantity + 1)}
                 >
-                  <PlusIcon className="text-[#395C4E]" />
+                  <PlusIcon className="text-[#2B2B2B] dark:text-[#FAFAFA]" />
                 </Button>
               </div>
             </div>

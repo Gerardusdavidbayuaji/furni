@@ -6,14 +6,13 @@ import CartTotal from "@/components/CartTotal";
 import Layout from "@/components/Layout";
 
 const CartPage = () => {
-  const cartState = useSelector((state: RootState) => state.cart);
-  const numItemsInCart = cartState?.numItemsInCart ?? 0;
+  const cartState = useSelector((state: RootState) => state.cart.cartItems);
 
-  if (numItemsInCart === 0) {
+  if (cartState.length === 0) {
     return (
       <Layout>
         <section className="flex flex-grow w-full justify-center items-center">
-          <h2 className="font-light">Your cart is empty</h2>
+          <h2 className="font-light">Wow, your cart is empty</h2>
         </section>
       </Layout>
     );
