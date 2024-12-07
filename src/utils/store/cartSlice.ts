@@ -70,13 +70,33 @@ const cartSlice = createSlice({
       }
     },
 
+    toggleItemCheck: (state, action: PayloadAction<number>) => {
+      const item = state.cartItems.find((item) => item.id === action.payload);
+      if (item) {
+        item.checked = !item.checked; // Toggle checked
+        cartSlice.caseReducers.calculateTotals(state); // Hitung ulang total
+        localStorage.setItem("cart", JSON.stringify(state));
+      }
+    },
+
     calculateTotals: (state) => {
-      state.cartTotal = state.cartItems.reduce(
-        (total, item) => total + parseFloat(item.price) * item.quantity,
-        0
-      );
-      state.tax = 0.1 * state.cartTotal;
-      state.orderTotal = state.cartTotal + state.shipping + state.tax;
+      const checkedItems = state.cartItems.filter((item) => item.checked);
+
+      if (checkedItems.length === 0) {
+        state.cartTotal = 0;
+        state.tax = 0;
+        state.shipping = 0;
+        state.orderTotal = 0;
+      } else {
+        state.cartTotal = checkedItems.reduce(
+          (total, item) => total + parseFloat(item.price) * item.quantity,
+          0
+        );
+        state.tax = 0.1 * state.cartTotal;
+        state.shipping = 500;
+        state.orderTotal = state.cartTotal + state.shipping + state.tax;
+      }
+
       localStorage.setItem("cart", JSON.stringify(state));
     },
 
@@ -91,5 +111,6 @@ const cartSlice = createSlice({
   },
 });
 
-export const { clearCart, addItem, removeItem, editItem } = cartSlice.actions;
+export const { clearCart, addItem, removeItem, editItem, toggleItemCheck } =
+  cartSlice.actions;
 export default cartSlice.reducer;

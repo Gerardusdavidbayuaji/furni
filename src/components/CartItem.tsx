@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 
-import { removeItem, editItem } from "@/utils/store/cartSlice";
+import { removeItem, editItem, toggleItemCheck } from "@/utils/store/cartSlice";
 import { ICartItem } from "@/utils/apis/products";
 import { formatPrice } from "@/utils/formatter";
 
@@ -11,11 +11,9 @@ import { toast } from "@/hooks/use-toast";
 
 interface CartItemProps {
   cartItem: ICartItem;
-  isChecked: boolean;
-  onCheckChange: (id: number) => void;
 }
 
-const CartItem = ({ cartItem, isChecked, onCheckChange }: CartItemProps) => {
+const CartItem = ({ cartItem }: CartItemProps) => {
   const dispatch = useDispatch();
 
   const handleRemoveItem = () => {
@@ -34,7 +32,7 @@ const CartItem = ({ cartItem, isChecked, onCheckChange }: CartItemProps) => {
   };
 
   const handleCheckBoxChange = () => {
-    onCheckChange(cartItem.id);
+    dispatch(toggleItemCheck(cartItem.id));
   };
 
   return (
@@ -45,7 +43,7 @@ const CartItem = ({ cartItem, isChecked, onCheckChange }: CartItemProps) => {
       <div className="flex items-center space-x-2">
         <Checkbox
           id={`select-item-${cartItem.id}`}
-          checked={isChecked}
+          checked={cartItem.checked} // Status checkbox mengikuti `cartItem.checked`
           onCheckedChange={handleCheckBoxChange}
           className="shadow-none"
         />

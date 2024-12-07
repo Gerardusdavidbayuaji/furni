@@ -47,6 +47,7 @@ export interface ICartItem {
   quantity: number;
   productColor: string | null;
   company: string;
+  checked: boolean;
 }
 
 export interface CartState {

@@ -15,7 +15,7 @@ const CartItemList = () => {
   const cartItems = useSelector(
     (state: RootState) => state.cart.cartItems || []
   );
-  const [selectAll, setSelectAll] = useState(false);
+  const [selectAll, setSelectAll] = useState<boolean>(true);
   const [checkedItems, setCheckedItems] = useState<number[]>([]);
 
   useEffect(() => {
@@ -32,12 +32,6 @@ const CartItemList = () => {
     } else {
       setCheckedItems(cartItems.map((item) => item.id));
     }
-  };
-
-  const handleItemCheck = (id: number) => {
-    setCheckedItems((prev) =>
-      prev.includes(id) ? prev.filter((itemId) => itemId !== id) : [...prev, id]
-    );
   };
 
   const handleClearCart = () => {
@@ -78,12 +72,7 @@ const CartItemList = () => {
       </div>
 
       {cartItems.map((item) => (
-        <CartItem
-          key={item.cartID}
-          cartItem={item}
-          isChecked={checkedItems.includes(item.id)}
-          onCheckChange={handleItemCheck}
-        />
+        <CartItem key={item.cartID} cartItem={item} />
       ))}
     </div>
   );
