@@ -23,9 +23,12 @@ const cartSlice = createSlice({
     addItem: (state, action: PayloadAction<ICartItem>) => {
       const { price, quantity, cartID } = action.payload;
 
-      const item = state.cartItems.find((i) => i.cartID === cartID);
-      if (item) {
-        item.quantity += quantity;
+      const productItem = state.cartItems.find(
+        (item) => item.cartID === cartID
+      );
+
+      if (productItem) {
+        productItem.quantity += quantity;
       } else {
         state.cartItems.push(action.payload);
       }
@@ -38,13 +41,17 @@ const cartSlice = createSlice({
     },
 
     removeItem: (state, action: PayloadAction<number>) => {
-      const item = state.cartItems.find((i) => i.id === action.payload);
-      if (item) {
+      const productItem = state.cartItems.find(
+        (item) => item.id === action.payload
+      );
+
+      if (productItem) {
         state.cartItems = state.cartItems.filter(
-          (item) => item.id !== action.payload
+          (productItem) => productItem.id !== action.payload
         );
-        state.numItemsInCart -= item.quantity;
-        state.cartTotal -= parseFloat(item.price) * item.quantity;
+
+        state.numItemsInCart -= productItem.quantity;
+        state.cartTotal -= parseFloat(productItem.price) * productItem.quantity;
 
         cartSlice.caseReducers.calculateTotals(state);
         localStorage.setItem("cart", JSON.stringify(state));
@@ -56,14 +63,15 @@ const cartSlice = createSlice({
       action: PayloadAction<{ id: number; quantity: number }>
     ) => {
       const { id, quantity } = action.payload;
-      const item = state.cartItems.find((item) => item.id === id);
+      const productItem = state.cartItems.find((item) => item.id === id);
 
-      if (item) {
-        const oldQuantity = item.quantity;
-        item.quantity = quantity;
+      if (productItem) {
+        const previousQuantity = productItem.quantity;
+        productItem.quantity = quantity;
 
-        state.numItemsInCart += quantity - oldQuantity;
-        state.cartTotal += (quantity - oldQuantity) * parseFloat(item.price);
+        state.numItemsInCart += quantity - previousQuantity;
+        state.cartTotal +=
+          (quantity - previousQuantity) * parseFloat(productItem.price);
 
         cartSlice.caseReducers.calculateTotals(state);
         localStorage.setItem("cart", JSON.stringify(state));
@@ -71,9 +79,12 @@ const cartSlice = createSlice({
     },
 
     toggleItemCheck: (state, action: PayloadAction<number>) => {
-      const item = state.cartItems.find((item) => item.id === action.payload);
-      if (item) {
-        item.checked = !item.checked;
+      const productItem = state.cartItems.find(
+        (item) => item.id === action.payload
+      );
+
+      if (productItem) {
+        productItem.checked = !productItem.checked;
         cartSlice.caseReducers.calculateTotals(state);
         localStorage.setItem("cart", JSON.stringify(state));
       }
