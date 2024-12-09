@@ -43,7 +43,7 @@ const CartItem = ({ cartItem }: CartItemProps) => {
       <div className="flex items-center space-x-2">
         <Checkbox
           id={`select-item-${cartItem.id}`}
-          checked={cartItem.checked} // Status checkbox mengikuti `cartItem.checked`
+          checked={cartItem.checked}
           onCheckedChange={handleCheckBoxChange}
           className="shadow-none"
         />

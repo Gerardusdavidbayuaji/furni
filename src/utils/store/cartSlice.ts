@@ -73,10 +73,18 @@ const cartSlice = createSlice({
     toggleItemCheck: (state, action: PayloadAction<number>) => {
       const item = state.cartItems.find((item) => item.id === action.payload);
       if (item) {
-        item.checked = !item.checked; // Toggle checked
-        cartSlice.caseReducers.calculateTotals(state); // Hitung ulang total
+        item.checked = !item.checked;
+        cartSlice.caseReducers.calculateTotals(state);
         localStorage.setItem("cart", JSON.stringify(state));
       }
+    },
+
+    toggleAllCheck: (state, action: PayloadAction<boolean>) => {
+      state.cartItems.forEach((item) => {
+        item.checked = action.payload;
+        cartSlice.caseReducers.calculateTotals(state);
+        localStorage.setItem("cart", JSON.stringify(state));
+      });
     },
 
     calculateTotals: (state) => {
@@ -111,6 +119,12 @@ const cartSlice = createSlice({
   },
 });
 
-export const { clearCart, addItem, removeItem, editItem, toggleItemCheck } =
-  cartSlice.actions;
+export const {
+  clearCart,
+  addItem,
+  removeItem,
+  editItem,
+  toggleItemCheck,
+  toggleAllCheck,
+} = cartSlice.actions;
 export default cartSlice.reducer;

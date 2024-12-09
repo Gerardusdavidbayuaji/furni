@@ -1,38 +1,30 @@
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { toast } from "@/hooks/use-toast";
+import { useEffect } from "react";
 
+import { clearCart, toggleAllCheck } from "@/utils/store/cartSlice";
 import { RootState } from "@/utils/store/store";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import CartItem from "./CartItem";
-import { clearCart } from "@/utils/store/cartSlice";
-import { useDispatch } from "react-redux";
-import { toast } from "@/hooks/use-toast";
 
 const CartItemList = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector(
     (state: RootState) => state.cart.cartItems || []
   );
-  const [selectAll, setSelectAll] = useState<boolean>(true);
-  const [checkedItems, setCheckedItems] = useState<number[]>([]);
 
-  useEffect(() => {
-    setCheckedItems(cartItems.map((item) => item.id));
-  }, [cartItems]);
-
-  useEffect(() => {
-    setSelectAll(checkedItems.length === cartItems.length);
-  }, [checkedItems, cartItems.length]);
+  const allChecked = cartItems.every((item) => item.checked);
 
   const handleSelectAll = () => {
-    if (selectAll) {
-      setCheckedItems([]);
-    } else {
-      setCheckedItems(cartItems.map((item) => item.id));
-    }
+    dispatch(toggleAllCheck(!allChecked));
   };
+
+  useEffect(() => {
+    dispatch(toggleAllCheck(true));
+  }, [dispatch]);
 
   const handleClearCart = () => {
     dispatch(clearCart());
@@ -50,7 +42,7 @@ const CartItemList = () => {
           <Checkbox
             id="select_all"
             className="shadow-none"
-            checked={selectAll}
+            checked={allChecked}
             onCheckedChange={handleSelectAll}
           />
           <label
@@ -61,7 +53,7 @@ const CartItemList = () => {
           </label>
         </div>
 
-        {checkedItems.length > 0 && (
+        {cartItems.some((item) => item.checked) && (
           <Button
             onClick={handleClearCart}
             className="flex text-end text-sm font-semibold text-[#395C4E] dark:text-[#778F86] bg-transparent hover:bg-transparent shadow-none px-0"
