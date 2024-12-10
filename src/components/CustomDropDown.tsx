@@ -71,7 +71,7 @@ const DropDown = () => {
       </DropdownMenu>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="bg-[#F0F2F1] w-[90%] h-[685px] mx-auto">
+        <DialogContent className="w-[90%] h-[685px] mx-auto">
           <div className="grid lg:grid-cols-2 md:grid-cols-1 w-full h-full p-3">
             <div className="lg:flex flex-col justify-center md:hidden">
               <h1 className="w-80 font-semibold text-3xl leading-10 ">
