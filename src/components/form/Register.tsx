@@ -1,9 +1,9 @@
 import { useForm } from "react-hook-form";
 
 import { CustomFormField } from "../CustomFormField";
+import CustomButton from "../CustomButton";
 import { Input } from "../ui/input";
 import { Form } from "../ui/form";
-import CustomButton from "../CustomButton";
 
 const Register = () => {
   const form = useForm();
@@ -50,12 +50,6 @@ const Register = () => {
           </CustomFormField>
 
           <div className="flex flex-col space-y-2">
-            {/* <Button
-              type="submit"
-              className="w-full bg-[#778F86] shadow-none hover:bg-[#778F86]/80 text-[#FAFAFA]"
-            >
-              Register
-            </Button> */}
             <CustomButton text="Register" action="Sending..." />
           </div>
         </form>

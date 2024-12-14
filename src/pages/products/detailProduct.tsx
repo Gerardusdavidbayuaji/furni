@@ -50,6 +50,7 @@ const DetailProduct = () => {
       quantity: amount,
       productColor,
       company: product.attributes.company || "Unknown Company",
+      checked: false,
     };
 
     dispatch(addItem(cartProduct));
@@ -83,7 +84,9 @@ const DetailProduct = () => {
     }
   }, [id]);
 
-  const cartItems = useSelector((state: RootState) => state.cart.cartItems);
+  const cartItems = useSelector(
+    (state: RootState) => state.cartState.cartItems
+  );
   useEffect(() => {
     console.log("cart item:", cartItems);
   }, [cartItems]);

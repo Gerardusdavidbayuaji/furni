@@ -22,12 +22,12 @@ const CartItem = ({ cartItem }: CartItemProps) => {
     toast({
       title: "Success removed item",
       description: "Item removed from cart",
-      variant: "destructive",
+      variant: "default",
     });
   };
 
   const handleAmountChange = (newAmount: number) => {
-    if (newAmount < 1 || newAmount > 100) return;
+    if (newAmount < 1 || newAmount > 10) return;
     dispatch(editItem({ id: cartItem.id, quantity: newAmount }));
   };
 

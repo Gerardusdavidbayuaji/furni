@@ -11,7 +11,7 @@ import NavLinks from "./NavLinks";
 
 const Navbar = () => {
   const cartItems = useSelector(
-    (state: RootState) => state.cart?.cartItems ?? []
+    (state: RootState) => state.cartState?.cartItems ?? []
   );
 
   const numItemsInCart = cartItems.reduce(

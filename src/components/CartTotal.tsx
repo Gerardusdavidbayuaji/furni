@@ -14,7 +14,7 @@ const CartTotal = () => {
   const [isPaymentSuccessed, setIsPaymentSuccessed] = useState(false);
   const navigate = useNavigate();
   const { cartTotal, shipping, tax, orderTotal } = useSelector(
-    (state: RootState) => state.cart
+    (state: RootState) => state.cartState
   );
 
   const handlePayment = () => {

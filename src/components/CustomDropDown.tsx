@@ -1,4 +1,10 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+
+import { clearCart } from "@/utils/store/cartSlice";
+import { logoutUser } from "@/utils/store/userSice";
+import { RootState } from "@/utils/store/store";
 
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import ThemeSubmenu from "./ThemeSubmenu";
@@ -18,17 +24,27 @@ import {
   LucideShoppingCart,
   PackageSearch,
   LogOutIcon,
+  LogInIcon,
   HandCoins,
   UserIcon,
   House,
 } from "lucide-react";
 
 const DropDown = () => {
+  const user = useSelector((state: RootState) => state.userState.user);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  const handleLogoutClick = (e: React.MouseEvent) => {
+  const handleLogin = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsDialogOpen(true);
+  };
+
+  const handleLogout = () => {
+    navigate("/");
+    dispatch(clearCart());
+    dispatch(logoutUser());
   };
 
   return (
@@ -61,11 +77,15 @@ const DropDown = () => {
               className="lg:hidden"
             />
             <ThemeSubmenu />
-            <MenuItem
-              Icon={LogOutIcon}
-              label="Logout"
-              onClick={handleLogoutClick}
-            />
+            {user ? (
+              <MenuItem
+                Icon={LogOutIcon}
+                label="Logout"
+                onClick={handleLogout}
+              />
+            ) : (
+              <MenuItem Icon={LogInIcon} label="Login" onClick={handleLogin} />
+            )}
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>

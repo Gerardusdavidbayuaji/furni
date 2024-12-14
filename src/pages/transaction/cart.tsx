@@ -6,7 +6,9 @@ import CartTotal from "@/components/CartTotal";
 import Layout from "@/components/Layout";
 
 const CartPage = () => {
-  const cartState = useSelector((state: RootState) => state.cart.cartItems);
+  const cartState = useSelector(
+    (state: RootState) => state.cartState.cartItems
+  );
 
   if (cartState.length === 0) {
     return (

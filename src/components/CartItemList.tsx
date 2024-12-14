@@ -13,7 +13,7 @@ import CartItem from "./CartItem";
 const CartItemList = () => {
   const dispatch = useDispatch();
   const cartItems = useSelector(
-    (state: RootState) => state.cart.cartItems || []
+    (state: RootState) => state.cartState.cartItems || []
   );
 
   const allChecked = cartItems.every((item) => item.checked);

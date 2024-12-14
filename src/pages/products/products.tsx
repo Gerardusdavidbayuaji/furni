@@ -11,7 +11,7 @@ const ProductsPage = () => {
 
   const handleSearch = async (newFilters: any) => {
     setFilters(newFilters);
-    setPage(1); // Reset page to 1 on new search
+    setPage(1);
   };
 
   return (
@@ -23,7 +23,7 @@ const ProductsPage = () => {
           <ProductContainer filters={filters} page={page} />
           <Pagination
             currentPage={page}
-            totalPages={3} // Update totalPages as needed
+            totalPages={3}
             onPageChange={setPage}
           />
         </div>
