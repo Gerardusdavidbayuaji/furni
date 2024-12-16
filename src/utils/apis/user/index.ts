@@ -1,3 +1,3 @@
-import { IUser, IUserState } from "./type";
+import { IUserState, RegisterSchema, LoginResponse, FormData } from "./type";
 
-export type { IUser, IUserState };
+export type { IUserState, RegisterSchema, LoginResponse, FormData };

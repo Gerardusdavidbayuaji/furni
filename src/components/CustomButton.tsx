@@ -6,14 +6,17 @@ interface propsButton {
   text: string;
   className?: string;
   action: string;
+  onClick?: () => void;
 }
 
 const CustomButton = (props: propsButton) => {
-  const { text, className, action } = props;
+  const { text, className, action, onClick } = props;
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
+    if (onClick) await onClick();
+    setIsSubmitting(false);
   };
 
   return (

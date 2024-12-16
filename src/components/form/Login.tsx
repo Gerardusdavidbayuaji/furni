@@ -1,15 +1,35 @@
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 import { CustomFormField } from "../CustomFormField";
 import { Input } from "../ui/input";
 import { Form } from "../ui/form";
 import CustomButton from "../CustomButton";
+import { LoginSchema } from "@/utils/apis/user/type";
+import { loginAccount } from "@/utils/apis/user/api";
+import { toast } from "@/hooks/use-toast";
+import { useDispatch } from "react-redux";
+import { loginUser } from "@/utils/store/userSice";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const form = useForm();
-  function onSubmitLogin() {
-    //testing
-  }
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const form = useForm<LoginSchema>();
+
+  const onSubmitLogin: SubmitHandler<LoginSchema> = async (data) => {
+    try {
+      const result = await loginAccount(data);
+      dispatch(loginUser(result));
+      toast({ description: "Login berhasil" });
+      navigate("/");
+    } catch (error: any) {
+      toast({
+        title: "oops, something went wrong!",
+        description: error.toString(),
+        variant: "destructive",
+      });
+    }
+  };
 
   return (
     <>
@@ -22,8 +42,14 @@ const Login = () => {
 
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmitLogin)} className="space-y-8">
-          <CustomFormField control={form.control} name="email" label="Email">
-            {(field) => <Input {...field} placeholder="email" type="email" />}
+          <CustomFormField
+            control={form.control}
+            name="identifier"
+            label="username"
+          >
+            {(field) => (
+              <Input {...field} placeholder="Username" type="username" />
+            )}
           </CustomFormField>
           <CustomFormField
             control={form.control}
@@ -31,12 +57,16 @@ const Login = () => {
             label="Password"
           >
             {(field) => (
-              <Input {...field} placeholder="password" type="password" />
+              <Input {...field} placeholder="Password" type="password" />
             )}
           </CustomFormField>
 
           <div className="flex flex-col space-y-2">
-            <CustomButton text="Login" action="Sending..." />
+            <CustomButton
+              text="Login"
+              action="Sending..."
+              onClick={form.handleSubmit(onSubmitLogin)}
+            />
           </div>
         </form>
       </Form>

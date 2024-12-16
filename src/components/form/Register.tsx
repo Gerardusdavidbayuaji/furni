@@ -4,12 +4,28 @@ import { CustomFormField } from "../CustomFormField";
 import CustomButton from "../CustomButton";
 import { Input } from "../ui/input";
 import { Form } from "../ui/form";
+import { registerAccount } from "@/utils/apis/user/api";
+import { toast } from "@/hooks/use-toast";
+import { RegisterSchema } from "@/utils/apis/user";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const form = useForm();
-  function onSubmitRegister() {
-    //testing
-  }
+  const form = useForm<RegisterSchema>();
+  const navigate = useNavigate();
+  const onSubmitRegister = async (data: RegisterSchema) => {
+    try {
+      const result = await registerAccount(data);
+      toast({ description: result.message });
+      navigate("/login");
+    } catch (error: any) {
+      console.log("error register", error);
+      toast({
+        title: "Oops, somethinh went wrong!",
+        description: error?.response?.data?.message || error?.message,
+        variant: "destructive",
+      });
+    }
+  };
 
   return (
     <>
@@ -24,6 +40,7 @@ const Register = () => {
         <form
           onSubmit={form.handleSubmit(onSubmitRegister)}
           className="space-y-8"
+          method="POST"
         >
           <CustomFormField
             control={form.control}
@@ -50,7 +67,11 @@ const Register = () => {
           </CustomFormField>
 
           <div className="flex flex-col space-y-2">
-            <CustomButton text="Register" action="Sending..." />
+            <CustomButton
+              text="Register"
+              action="Sending..."
+              onClick={form.handleSubmit(onSubmitRegister)}
+            />
           </div>
         </form>
       </Form>

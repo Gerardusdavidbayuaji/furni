@@ -1,16 +1,23 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IUserState } from "../apis/user";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { IUserState, LoginResponse } from "../apis/user";
 
 const initialState: IUserState = {
-  user: { username: "glup" },
+  user: null,
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    loginUser: () => {
-      console.log("login");
+    loginUser: (state, action: PayloadAction<LoginResponse>) => {
+      state.user = {
+        id: action.payload.user.id,
+        username: action.payload.user.username,
+        email: action.payload.user.email,
+        token: action.payload.jwt,
+      };
+      localStorage.setItem("user", JSON.stringify(state.user));
+      console.log(action.payload);
     },
 
     logoutUser: (state) => {
