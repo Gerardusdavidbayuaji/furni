@@ -13,13 +13,7 @@ export interface RegisterSchema {
   password: string;
 }
 
-export interface FormData {
-  username: string;
-  email: string;
-  password: string;
-}
-
-export interface LoginResponse {
+export interface SuccessResponse {
   jwt: string;
   user: {
     id: number;
@@ -30,5 +24,21 @@ export interface LoginResponse {
     blocked: boolean;
     createdAt: string;
     updatedAt: string;
+  };
+}
+
+export interface ErrorResponse {
+  data: null;
+  error: {
+    status: number;
+    name: string;
+    message: string;
+    details?: {
+      errors?: {
+        path: string[];
+        message: string;
+        name: string;
+      }[];
+    };
   };
 }

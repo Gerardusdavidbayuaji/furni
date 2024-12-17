@@ -1,3 +1,17 @@
-import { IUserState, RegisterSchema, LoginResponse, FormData } from "./type";
+import {
+  SuccessResponse,
+  RegisterSchema,
+  LoginResponse,
+  ErrorResponse,
+  IUserState,
+  FormData,
+} from "./type";
 
-export type { IUserState, RegisterSchema, LoginResponse, FormData };
+export type {
+  SuccessResponse,
+  RegisterSchema,
+  LoginResponse,
+  ErrorResponse,
+  IUserState,
+  FormData,
+};

@@ -1,23 +1,35 @@
+import {
+  LoginSchema,
+  RegisterSchema,
+  ErrorResponse,
+  SuccessResponse,
+} from "./type";
 import axiosWithConfig from "../axiosWithConfig";
-import { RegisterSchema } from ".";
-import { LoginResponse, LoginSchema } from "./type";
 
 export const loginAccount = async (
   data: LoginSchema
-): Promise<LoginResponse> => {
+): Promise<SuccessResponse> => {
   try {
     const response = await axiosWithConfig.post("/auth/local", data);
-    return response.data as LoginResponse;
+
+    return response.data as SuccessResponse;
   } catch (error: any) {
-    throw Error(error.response.data.message || "Failed to login");
+    const errorResponse: ErrorResponse = error.response?.data;
+
+    throw errorResponse?.error;
   }
 };
 
-export const registerAccount = async (data: RegisterSchema) => {
+export const registerAccount = async (
+  data: RegisterSchema
+): Promise<SuccessResponse> => {
   try {
     const response = await axiosWithConfig.post("/auth/local/register", data);
-    return response.data;
+
+    return response.data as SuccessResponse;
   } catch (error: any) {
-    throw Error(error.response?.data?.message || "Failed to register");
+    const errorResponse: ErrorResponse = error.response?.data;
+
+    throw errorResponse?.error;
   }
 };
