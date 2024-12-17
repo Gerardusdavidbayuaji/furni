@@ -1,21 +1,21 @@
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useState } from "react";
 
 import { RootState } from "@/utils/store/store";
 import { formatPrice } from "@/utils/formatter";
 
-import { Button } from "./ui/button";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
-import { useState } from "react";
 import Auth from "@/pages/auth/auth";
+import { Button } from "./ui/button";
 
 const CartTotal = () => {
-  const user = true;
+  const { user } = useSelector((state: RootState) => state.userState);
   const [isPaymentSuccessed, setIsPaymentSuccessed] = useState(false);
-  const navigate = useNavigate();
   const { cartTotal, shipping, tax, orderTotal } = useSelector(
     (state: RootState) => state.cartState
   );
+  const navigate = useNavigate();
 
   const handlePayment = () => {
     setIsPaymentSuccessed(true);

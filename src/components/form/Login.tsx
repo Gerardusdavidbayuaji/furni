@@ -1,31 +1,35 @@
 import { useForm, SubmitHandler } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { toast } from "@/hooks/use-toast";
+
+import { loginAccount } from "@/utils/apis/user/api";
+import { LoginSchema } from "@/utils/apis/user/type";
+import { loginUser } from "@/utils/store/userSice";
 
 import { CustomFormField } from "../CustomFormField";
+import CustomButton from "../CustomButton";
 import { Input } from "../ui/input";
 import { Form } from "../ui/form";
-import CustomButton from "../CustomButton";
-import { LoginSchema } from "@/utils/apis/user/type";
-import { loginAccount } from "@/utils/apis/user/api";
-import { toast } from "@/hooks/use-toast";
-import { useDispatch } from "react-redux";
-import { loginUser } from "@/utils/store/userSice";
-import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
   const form = useForm<LoginSchema>();
+  const dispatch = useDispatch();
 
   const onSubmitLogin: SubmitHandler<LoginSchema> = async (data) => {
     try {
       const result = await loginAccount(data);
       dispatch(loginUser(result));
-      toast({ description: "Login berhasil" });
-      navigate("/");
-    } catch (error: any) {
       toast({
-        title: "oops, something went wrong!",
-        description: error.toString(),
+        title: "Login Successful",
+        description: `Welcome ${result.user.username}, You have successfully logged in.`,
+        variant: "default",
+      });
+    } catch (error: any) {
+      const errorMessage = error.details?.errors?.[0]?.message || error.message;
+
+      toast({
+        title: "Oops, something went wrong!",
+        description: errorMessage,
         variant: "destructive",
       });
     }

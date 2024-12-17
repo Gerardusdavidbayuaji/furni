@@ -1,27 +1,32 @@
 import { useForm } from "react-hook-form";
 
+import { registerAccount } from "@/utils/apis/user/api";
+import { RegisterSchema } from "@/utils/apis/user";
+
 import { CustomFormField } from "../CustomFormField";
 import CustomButton from "../CustomButton";
+import { toast } from "@/hooks/use-toast";
 import { Input } from "../ui/input";
 import { Form } from "../ui/form";
-import { registerAccount } from "@/utils/apis/user/api";
-import { toast } from "@/hooks/use-toast";
-import { RegisterSchema } from "@/utils/apis/user";
-import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const form = useForm<RegisterSchema>();
-  const navigate = useNavigate();
+  const form = useForm<RegisterSchema>({});
+
   const onSubmitRegister = async (data: RegisterSchema) => {
     try {
       const result = await registerAccount(data);
-      toast({ description: result.message });
-      navigate("/login");
-    } catch (error: any) {
-      console.log("error register", error);
+
       toast({
-        title: "Oops, somethinh went wrong!",
-        description: error?.response?.data?.message || error?.message,
+        title: "Registration Successful",
+        description: `Welcome ${result.user.username}, Your account has been created.`,
+        variant: "default",
+      });
+    } catch (error: any) {
+      const errorMessage = error.details?.errors?.[0]?.message || error.message;
+
+      toast({
+        title: "Oops, something went wrong!",
+        description: errorMessage,
         variant: "destructive",
       });
     }
@@ -47,13 +52,11 @@ const Register = () => {
             name="username"
             label="Username"
           >
-            {(field) => (
-              <Input {...field} placeholder="username" type="username" />
-            )}
+            {(field) => <Input {...field} placeholder="Username" type="text" />}
           </CustomFormField>
 
           <CustomFormField control={form.control} name="email" label="Email">
-            {(field) => <Input {...field} placeholder="email" type="email" />}
+            {(field) => <Input {...field} placeholder="Email" type="email" />}
           </CustomFormField>
 
           <CustomFormField
@@ -62,7 +65,7 @@ const Register = () => {
             label="Password"
           >
             {(field) => (
-              <Input {...field} placeholder="password" type="password" />
+              <Input {...field} placeholder="Password" type="password" />
             )}
           </CustomFormField>
 

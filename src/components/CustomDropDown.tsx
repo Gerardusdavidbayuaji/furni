@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "@/hooks/use-toast";
 import { useState } from "react";
 
 import { clearCart } from "@/utils/store/cartSlice";
@@ -45,6 +46,9 @@ const DropDown = () => {
     navigate("/");
     dispatch(clearCart());
     dispatch(logoutUser());
+    toast({
+      description: "Logged Out Successfully",
+    });
   };
 
   return (
@@ -54,7 +58,11 @@ const DropDown = () => {
           <UserIcon className="w-6 h-6 cursor-pointer" />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-48 mr-24 mt-1">
-          <DropdownMenuLabel>Hi, Jhon Doe</DropdownMenuLabel>
+          {user ? (
+            <DropdownMenuLabel>Hi, {user?.username}</DropdownMenuLabel>
+          ) : (
+            <DropdownMenuLabel>Hi, please login</DropdownMenuLabel>
+          )}
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
             <MenuItem Icon={House} label="Home" to="/" className="lg:hidden" />
