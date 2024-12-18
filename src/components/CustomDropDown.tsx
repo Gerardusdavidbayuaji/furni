@@ -78,12 +78,14 @@ const DropDown = () => {
               to="/cart"
               className="lg:hidden"
             />
-            <MenuItem
-              Icon={HandCoins}
-              label="Orders"
-              to="/orders"
-              className="lg:hidden"
-            />
+            {user && (
+              <MenuItem
+                Icon={HandCoins}
+                label="Orders"
+                to="/orders"
+                className="lg:hidden"
+              />
+            )}
             <ThemeSubmenu />
             {user ? (
               <MenuItem

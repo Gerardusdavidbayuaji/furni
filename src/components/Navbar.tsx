@@ -1,6 +1,5 @@
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
 
 import { RootState } from "@/utils/store/store";
 
@@ -18,11 +17,6 @@ const Navbar = () => {
     (total, cartItem) => total + cartItem.quantity,
     0
   );
-
-  useEffect(() => {
-    console.log("numItemsInCart:", numItemsInCart);
-    console.log("cartItems:", cartItems);
-  }, [numItemsInCart, cartItems]);
 
   return (
     <header className="w-full bg-[#395C4E] sticky top-0 z-50">
