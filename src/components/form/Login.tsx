@@ -1,9 +1,10 @@
 import { useForm, SubmitHandler } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch } from "react-redux";
 import { toast } from "@/hooks/use-toast";
 
-import { loginAccount } from "@/utils/apis/user/api";
-import { LoginSchema } from "@/utils/apis/user/type";
+import { loginAccount } from "@/utils/apis/user";
+import { LoginSchema, loginSchema } from "@/utils/apis/user/type";
 import { loginUser } from "@/utils/store/userSice";
 
 import { CustomFormField } from "../CustomFormField";
@@ -12,8 +13,14 @@ import { Input } from "../ui/input";
 import { Form } from "../ui/form";
 
 const Login = () => {
-  const form = useForm<LoginSchema>();
   const dispatch = useDispatch();
+  const form = useForm<LoginSchema>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      identifier: "",
+      password: "",
+    },
+  });
 
   const onSubmitLogin: SubmitHandler<LoginSchema> = async (data) => {
     try {
@@ -49,10 +56,10 @@ const Login = () => {
           <CustomFormField
             control={form.control}
             name="identifier"
-            label="username"
+            label="Username"
           >
             {(field) => (
-              <Input {...field} placeholder="Username" type="username" />
+              <Input {...field} placeholder="Jhon Doe" type="username" />
             )}
           </CustomFormField>
           <CustomFormField
@@ -61,7 +68,11 @@ const Login = () => {
             label="Password"
           >
             {(field) => (
-              <Input {...field} placeholder="Password" type="password" />
+              <Input
+                {...field}
+                placeholder="Minimum 6 character"
+                type="password"
+              />
             )}
           </CustomFormField>
 

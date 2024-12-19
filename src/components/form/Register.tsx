@@ -1,8 +1,8 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 
+import { RegisterSchema, registerSchema } from "@/utils/apis/user/type";
 import { registerAccount } from "@/utils/apis/user/api";
-import { RegisterSchema } from "@/utils/apis/user";
-
 import { CustomFormField } from "../CustomFormField";
 import CustomButton from "../CustomButton";
 import { toast } from "@/hooks/use-toast";
@@ -10,7 +10,14 @@ import { Input } from "../ui/input";
 import { Form } from "../ui/form";
 
 const Register = () => {
-  const form = useForm<RegisterSchema>({});
+  const form = useForm<RegisterSchema>({
+    resolver: zodResolver(registerSchema),
+    defaultValues: {
+      username: "",
+      email: "",
+      password: "",
+    },
+  });
 
   const onSubmitRegister = async (data: RegisterSchema) => {
     try {
@@ -52,11 +59,13 @@ const Register = () => {
             name="username"
             label="Username"
           >
-            {(field) => <Input {...field} placeholder="Username" type="text" />}
+            {(field) => <Input {...field} placeholder="Jhon Doe" type="text" />}
           </CustomFormField>
 
           <CustomFormField control={form.control} name="email" label="Email">
-            {(field) => <Input {...field} placeholder="Email" type="email" />}
+            {(field) => (
+              <Input {...field} placeholder="jhondoe@gmail.com" type="email" />
+            )}
           </CustomFormField>
 
           <CustomFormField
@@ -65,7 +74,11 @@ const Register = () => {
             label="Password"
           >
             {(field) => (
-              <Input {...field} placeholder="Password" type="password" />
+              <Input
+                {...field}
+                placeholder="Minimum 6 character"
+                type="password"
+              />
             )}
           </CustomFormField>
 

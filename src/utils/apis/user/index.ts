@@ -1,17 +1,17 @@
+import { loginAccount, registerAccount } from "./api";
 import {
   SuccessResponse,
   RegisterSchema,
-  LoginResponse,
+  LoginSchema,
   ErrorResponse,
   IUserState,
-  FormData,
 } from "./type";
 
+export { loginAccount, registerAccount };
 export type {
   SuccessResponse,
-  RegisterSchema,
-  LoginResponse,
   ErrorResponse,
   IUserState,
-  FormData,
+  RegisterSchema,
+  LoginSchema,
 };
