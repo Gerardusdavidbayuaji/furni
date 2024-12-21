@@ -57,13 +57,4 @@ export interface CartState {
   shipping: number;
   tax: number;
   orderTotal: number;
-  orders: [];
-}
-
-export interface IOrderItem {
-  id: number;
-  title: string;
-  image: string;
-  quantity: number;
-  price: number;
 }

@@ -1,8 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IOrderItem } from "../apis/products";
+
+interface Order {
+  id: string;
+  products: any[];
+  totalAmount: number;
+  paymentDate: string;
+}
 
 interface OrderState {
-  orders: IOrderItem[];
+  orders: Order[];
 }
 
 const initialState: OrderState = {
@@ -13,7 +19,7 @@ const orderSlice = createSlice({
   name: "order",
   initialState,
   reducers: {
-    addOrder(state, action: PayloadAction<IOrderItem>) {
+    addOrder(state, action: PayloadAction<Order>) {
       state.orders.push(action.payload);
     },
   },

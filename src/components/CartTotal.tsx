@@ -1,24 +1,51 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
 import { useState } from "react";
 
+import { removeSingleProductForOrder } from "@/utils/store/cartSlice";
+import { removeAllProductForOrder } from "@/utils/store/cartSlice";
+import { addOrder } from "@/utils/store/orderSlice";
 import { RootState } from "@/utils/store/store";
 import { formatPrice } from "@/utils/formatter";
 
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Auth from "@/pages/auth/auth";
 import { Button } from "./ui/button";
+import dayjs from "dayjs";
 
 const CartTotal = () => {
   const { user } = useSelector((state: RootState) => state.userState);
+  const cartItems = useSelector(
+    (state: RootState) => state.cartState.cartItems
+  );
   const [isPaymentSuccessed, setIsPaymentSuccessed] = useState(false);
   const { cartTotal, shipping, tax, orderTotal } = useSelector(
     (state: RootState) => state.cartState
   );
+  const seletedProduct = cartItems.filter((item) => item.checked);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handlePayment = () => {
     setIsPaymentSuccessed(true);
+
+    const order = {
+      id: new Date().getTime().toString(),
+      products: seletedProduct,
+      totalAmount: orderTotal,
+      paymentDate: dayjs().format("DD MMMM YYYY"),
+    };
+
+    dispatch(addOrder(order));
+
+    if (seletedProduct.length === cartItems.length) {
+      dispatch(removeAllProductForOrder());
+    } else {
+      seletedProduct.forEach((product) => {
+        dispatch(removeSingleProductForOrder(product.id));
+      });
+    }
+
     setTimeout(() => {
       navigate("/orders");
     }, 3000);

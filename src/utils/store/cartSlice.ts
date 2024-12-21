@@ -4,7 +4,6 @@ import { ICartItem, CartState } from "../apis/products";
 const defaultState: CartState = {
   cartItems: [],
   numItemsInCart: 0,
-  orders: [],
   cartTotal: 0,
   shipping: 500,
   tax: 0,
@@ -129,10 +128,34 @@ const cartSlice = createSlice({
       localStorage.removeItem("cart");
     },
 
-    addToOrders: (state, action: PayloadAction<ICartItem[]>) {
-      state.orders.push(...action.payload)
-      state.cartItems = []
-    }
+    removeAllProductForOrder: (state) => {
+      state.cartItems = state.cartItems.filter((item) => !item.checked);
+      state.numItemsInCart = state.cartItems.reduce(
+        (total, item) => total + item.quantity,
+        0
+      );
+      state.cartTotal = state.cartItems.reduce(
+        (total, item) => total + parseFloat(item.price) * item.quantity,
+        0
+      );
+
+      cartSlice.caseReducers.calculateTotals(state);
+      localStorage.setItem("cart", JSON.stringify(state));
+    },
+
+    removeSingleProductForOrder: (state, action: PayloadAction<number>) => {
+      const itemId = action.payload;
+      const productItem = state.cartItems.find((item) => item.id === itemId);
+
+      if (productItem && productItem.checked) {
+        state.cartItems = state.cartItems.filter((item) => item.id !== itemId);
+        state.numItemsInCart -= productItem.quantity;
+        state.cartTotal -= parseFloat(productItem.price) * productItem.quantity;
+
+        cartSlice.caseReducers.calculateTotals(state);
+        localStorage.setItem("cart", JSON.stringify(state));
+      }
+    },
   },
 });
 
@@ -143,5 +166,7 @@ export const {
   editItem,
   toggleItemCheck,
   toggleAllCheck,
+  removeAllProductForOrder,
+  removeSingleProductForOrder,
 } = cartSlice.actions;
 export default cartSlice.reducer;
