@@ -4,6 +4,7 @@ import { ICartItem, CartState } from "../apis/products";
 const defaultState: CartState = {
   cartItems: [],
   numItemsInCart: 0,
+  orders: [],
   cartTotal: 0,
   shipping: 500,
   tax: 0,
@@ -127,6 +128,11 @@ const cartSlice = createSlice({
       state.orderTotal = 0;
       localStorage.removeItem("cart");
     },
+
+    addToOrders: (state, action: PayloadAction<ICartItem[]>) {
+      state.orders.push(...action.payload)
+      state.cartItems = []
+    }
   },
 });
 

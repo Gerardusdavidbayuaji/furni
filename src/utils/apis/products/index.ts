@@ -1,5 +1,5 @@
 import { getFeaturedProducts, getAllProducts, getDetailProduct } from "./api";
-import { IProducts, ICartItem, CartState } from "./types";
+import { IProducts, ICartItem, CartState, IOrderItem } from "./types";
 
 export default { getFeaturedProducts, getAllProducts, getDetailProduct };
-export type { IProducts, ICartItem, CartState };
+export type { IProducts, ICartItem, CartState, IOrderItem };
