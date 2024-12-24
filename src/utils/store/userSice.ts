@@ -1,15 +1,19 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IUserState, LoginResponse } from "../apis/user";
+import { IUserState, SuccessResponse } from "../apis/user";
+
+const getUserFromLocalStorage = (): IUserState["user"] => {
+  return JSON.parse(localStorage.getItem("user") || "null");
+};
 
 const initialState: IUserState = {
-  user: null,
+  user: getUserFromLocalStorage(),
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    loginUser: (state, action: PayloadAction<LoginResponse>) => {
+    loginUser: (state, action: PayloadAction<SuccessResponse>) => {
       state.user = {
         id: action.payload.user.id,
         username: action.payload.user.username,
