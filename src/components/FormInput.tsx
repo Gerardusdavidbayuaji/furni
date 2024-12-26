@@ -5,9 +5,9 @@ interface propsSearch {
   id: string;
   name: string;
   label: string;
-  value: string; // Menambahkan 'value' ke dalam interface
+  value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  defaultValue: string;
+  defaultValue?: string;
 }
 
 const FormInput = (props: propsSearch) => {
@@ -16,7 +16,10 @@ const FormInput = (props: propsSearch) => {
   return (
     <div className="rounded-md p-2 flex justify-start items-center text-center">
       <div className="grid w-full max-w-sm gap-1.5">
-        <Label htmlFor={name} className="text-left">
+        <Label
+          htmlFor={name}
+          className="text-left lg:text-sm md:text-sm text-xs"
+        >
           {label}
         </Label>
         <Input

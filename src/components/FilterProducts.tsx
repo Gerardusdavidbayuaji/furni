@@ -20,7 +20,7 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
     company: "",
     price: 0,
     freeShipping: false,
-    sort: "name-asc", // Default sort: A-Z
+    sort: "name-asc",
   });
 
   useEffect(() => {
@@ -62,6 +62,13 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
     onSearch(filters);
   };
 
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFilters({
+      ...filters,
+      search: e.target.value,
+    });
+  };
+
   const handleReset = () => {
     const resetFilters = {
       search: "",
@@ -69,30 +76,33 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
       company: "",
       price: 0,
       freeShipping: false,
-      sort: "name-asc", // Reset to default sort A-Z
+      sort: "name-asc",
     };
     setFilters(resetFilters);
     onSearch(resetFilters);
   };
 
+  console.log("filter product cek", filters);
+
   const handleChange = (field: string, value: any) => {
     const updatedFilters = { ...filters, [field]: value };
     setFilters(updatedFilters);
 
-    // Apply filters immediately for real-time updates
     if (field === "search" || field === "freeShipping" || field === "sort") {
       onSearch(updatedFilters);
     }
+
+    console.log("filter", updatedFilters);
   };
 
   return (
-    <div className="grid grid-rows-2 grid-cols-4 gap-2 p-2 lg:h-60 md:h-40 w-full rounded-lg bg-[#DFE6E6] dark:bg-[#242322]">
+    <div className="grid md:grid-rows-4 md:grid-cols-2 lg:grid-rows-2 lg:grid-cols-4 lg:gap-2 md:gap-4 p-2 lg:h-60 md:h-96 w-full rounded-lg bg-[#DFE6E6] dark:bg-[#242322]">
       <FormInput
         id="search-product"
         name="search"
         label="Search Product"
         value={filters.search}
-        onChange={(e) => handleChange("search", e.target.value)}
+        onChange={handleSearchChange}
         defaultValue="Search Product . . ."
       />
       <FormSelect
@@ -140,7 +150,7 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
       <div className="rounded-md p-2 flex justify-center items-center text-center">
         <Button
           onClick={handleSearch}
-          className="rounded-lg bg-[#F5C02F] shadow-none hover:bg-[#F5C02F]/80 text-[#2B2B2B] w-40 mt-2 md:text-xs md:h-auto"
+          className="rounded-lg bg-[#F5C02F] shadow-none hover:bg-[#F5C02F]/80 text-[#2B2B2B] w-full md:w-40 lg:w-40 mt-2 lg:text-sm md:text-sm text-xs md:h-auto"
         >
           Search
         </Button>
@@ -148,7 +158,7 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
       <div className="rounded-md p-2 flex justify-center items-center text-center">
         <Button
           onClick={handleReset}
-          className="rounded-lg bg-[#778F86] shadow-none hover:bg-[#778F86]/80 text-[#FAFAFA] w-40 mt-2 md:text-xs md:h-auto"
+          className="rounded-lg bg-[#778F86] shadow-none hover:bg-[#778F86]/80 text-[#FAFAFA] w-full md:w-40 lg:w-40 mt-2 lg:text-sm md:text-sm text-xs md:h-auto"
         >
           Reset
         </Button>

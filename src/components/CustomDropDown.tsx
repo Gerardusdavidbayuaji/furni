@@ -55,7 +55,7 @@ const DropDown = () => {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <UserIcon className="w-6 h-6 cursor-pointer" />
+          <UserIcon className="w-5 h-5 md:w-6 md:h-6 cursor-pointer" />
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-48 mr-24 mt-1">
           {user ? (
@@ -101,13 +101,13 @@ const DropDown = () => {
       </DropdownMenu>
 
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className="w-[90%] h-[685px] mx-auto">
+        <DialogContent className="w-[90%] h-[500px] rounded-lg lg:w-[90%] lg:h-[685px] md:w-[90%] md:h-[500px] mx-auto">
           <div className="grid lg:grid-cols-2 md:grid-cols-1 w-full h-full p-3">
             <div className="lg:flex flex-col justify-center md:hidden">
-              <h1 className="w-80 font-semibold text-3xl leading-10 ">
+              <h1 className="w-80 font-semibold text-lg lg:text-3xl md:text-2xl lg:leading-10">
                 Transform Your Space with Elegant Furniture.
               </h1>
-              <p className="text-[#2B2B2B] dark:text-[#bfbfbb] font-normal text-base mt-1">
+              <p className="text-[#2B2B2B] dark:text-[#bfbfbb] font-normal text-sm lg:text-base mt-1">
                 Bawa kenyamanan ke rumah Anda dengan koleksi furnitur terbaru
                 kami.
               </p>

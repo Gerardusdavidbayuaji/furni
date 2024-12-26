@@ -36,7 +36,7 @@ const CartItemList = () => {
   };
 
   return (
-    <div className="col-span-2 space-y-4">
+    <div className="lg:col-span-2 md:col-span-2 space-y-4">
       <div className="bg-[#DFE6E6] dark:bg-[#242322] w-full p-5 rounded-lg flex justify-between h-[77px]">
         <div className="flex items-center space-x-2">
           <Checkbox
@@ -47,7 +47,7 @@ const CartItemList = () => {
           />
           <label
             htmlFor="select_all"
-            className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-[#2B2B2B] dark:text-[#FAFAFA]"
+            className="text-xs lg:text-sm md:text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-[#2B2B2B] dark:text-[#FAFAFA]"
           >
             Select All <span>({cartItems.length})</span>
           </label>
@@ -56,7 +56,7 @@ const CartItemList = () => {
         {cartItems.some((item) => item.checked) && (
           <Button
             onClick={handleClearCart}
-            className="flex text-end text-sm font-semibold text-[#395C4E] dark:text-[#778F86] bg-transparent hover:bg-transparent shadow-none px-0"
+            className="flex text-end text-xs lg:text-sm md:text-sm font-semibold text-[#395C4E] dark:text-[#778F86] bg-transparent hover:bg-transparent shadow-none px-0"
           >
             Delete
           </Button>

@@ -52,24 +52,28 @@ const CartTotal = () => {
   };
 
   return (
-    <div className="bg-[#DFE6E6] dark:bg-[#242322] text-[#2B2B2B] dark:text-[#FAFAFA] p-5 h-60 rounded-lg space-y-2 text-base font-medium">
-      <h1 className="mt-1">Shopping Summary</h1>
+    <div className="bg-[#DFE6E6] dark:bg-[#242322] text-[#2B2B2B] dark:text-[#FAFAFA] p-5 lg:h-60 md:h-60 rounded-lg space-y-2 text-base font-medium">
+      <h1 className="text-xs lg:text-sm md:text-sm mt-1">Shopping Summary</h1>
       <div className=" space-y-2">
-        <div className="flex justify-between text-sm font-normal">
+        <div className="flex justify-between font-normal md:text-sm text-xs">
           <h2>Sub total</h2>
-          <p>{formatPrice(cartTotal)}</p>
+          <p className="font-normal md:text-sm text-xs">
+            {formatPrice(cartTotal)}
+          </p>
         </div>
-        <div className="flex justify-between text-sm font-normal">
+        <div className="flex justify-between font-normal md:text-sm text-xs">
           <h2>Shipping</h2>
-          <p>{formatPrice(shipping)}</p>
+          <p className="font-normal md:text-sm text-xs">
+            {formatPrice(shipping)}
+          </p>
         </div>
-        <div className="flex justify-between text-sm font-normal">
+        <div className="flex justify-between font-normal md:text-sm text-xs">
           <h2>Tax</h2>
-          <p>{formatPrice(tax)}</p>
+          <p className="font-normal md:text-sm text-xs">{formatPrice(tax)}</p>
         </div>
-        <div className="flex justify-between text-sm font-normal">
+        <div className="flex justify-between font-normal md:text-sm text-xs">
           <h2>Orders total</h2>
-          <p className="text-[#778F86] text-base font-medium">
+          <p className="text-[#778F86] text-sm lg:text-base font-medium">
             {formatPrice(orderTotal)}
           </p>
         </div>
@@ -77,35 +81,43 @@ const CartTotal = () => {
       {user ? (
         <Dialog>
           <DialogTrigger className="w-full">
-            <Button className="w-full bg-[#F5C02F] shadow-none hover:bg-[#F5C02F]/80 text-[#2B2B2B]">
+            <Button className="w-full bg-[#F5C02F] text-sm lg:text-base shadow-none hover:bg-[#F5C02F]/80 text-[#2B2B2B]">
               Checkout
             </Button>
           </DialogTrigger>
           {!isPaymentSuccessed ? (
-            <DialogContent className="w-2/5 h-[350px] mx-auto">
+            <DialogContent className="rounded-lg h-[280px] w-5/6 lg:w-2/5 lg:h-[350px] md:w-1/2 md:h-[350px] mx-auto">
               <div className="flex flex-col justify-between">
                 <div>
-                  <h1 className="font-semibold text-2xl">Total Pesanan Anda</h1>
-                  <p className="text-[#2B2B2B]/70 dark:text-[#bfbfbb] font-normal text-base">
+                  <h1 className="font-semibold text-lg lg:text-2xl md:text-xl">
+                    Total Pesanan Anda
+                  </h1>
+                  <p className="text-[#2B2B2B]/70 dark:text-[#bfbfbb] font-normal text-sm lg:text-base">
                     Cek total belanja Anda sebelum melanjutkan ke pembayaran
                   </p>
                 </div>
                 <div className="space-y-2">
-                  <div className="flex justify-between text-sm font-normal">
+                  <div className="flex justify-between font-normal md:text-sm text-xs">
                     <h2>Sub total</h2>
-                    <p>{formatPrice(cartTotal)}</p>
+                    <p className="font-normal md:text-sm text-xs">
+                      {formatPrice(cartTotal)}
+                    </p>
                   </div>
-                  <div className="flex justify-between text-sm font-normal">
+                  <div className="flex justify-between font-normal md:text-sm text-xs">
                     <h2>Shipping</h2>
-                    <p>{formatPrice(shipping)}</p>
+                    <p className="font-normal md:text-sm text-xs">
+                      {formatPrice(shipping)}
+                    </p>
                   </div>
-                  <div className="flex justify-between text-sm font-normal">
+                  <div className="flex justify-between font-normal md:text-sm text-xs">
                     <h2>Tax</h2>
-                    <p>{formatPrice(tax)}</p>
+                    <p className="font-normal md:text-sm text-xs">
+                      {formatPrice(tax)}
+                    </p>
                   </div>
-                  <div className="flex justify-between text-sm font-normal">
+                  <div className="flex justify-between font-normal md:text-sm text-xs">
                     <h2>Orders total</h2>
-                    <p className="text-[#778F86] text-base font-medium">
+                    <p className="text-[#778F86] text-sm lg:text-base font-medium">
                       {formatPrice(orderTotal)}
                     </p>
                   </div>

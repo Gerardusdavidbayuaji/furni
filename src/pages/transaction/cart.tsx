@@ -23,8 +23,8 @@ const CartPage = () => {
   return (
     <Layout>
       <section className="flex flex-col flex-grow w-full">
-        <div className="flex-grow px-24 my-7 space-y-5">
-          <div className="grid grid-cols-3 gap-4">
+        <div className="flex-grow px-12 sm:px-12 lg:px-24 my-7 space-y-5">
+          <div className="grid lg:grid-cols-3 md:grid-cols-3 grid-cols-1  gap-4">
             <CartItemList />
             <CartTotal />
           </div>

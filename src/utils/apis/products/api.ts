@@ -18,6 +18,7 @@ export const getAllProducts = async (params?: Record<string, any>) => {
 
     const url = query ? `/products?${query}` : `/products`;
     const response = await axiosWithConfig.get(url);
+    console.log("API Query:", url);
     return response.data;
   } catch (error: any) {
     throw Error(error.response?.data?.message || "Error fetching products");

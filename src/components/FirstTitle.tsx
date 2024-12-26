@@ -11,7 +11,7 @@ const FirstTitle = (props: FirstTitleProps) => {
   return (
     <div
       className={cn(
-        "lg:font-medium text-4xl md:text-3xl text-[#FAFAFA]",
+        "lg:font-medium text-lg md:text-4xl text-[#FAFAFA]",
         className
       )}
     >

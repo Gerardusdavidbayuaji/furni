@@ -203,7 +203,7 @@ const CarouselPrevious = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute bottom-5 lg:left-[48%] md:left-[45%] transform -translate-x-1/2 rounded-full",
+        "absolute bottom-5 lg:left-[48%] md:left-[46%] transform -translate-x-1/2 rounded-full hidden md:block lg:block justify-items-center",
         className
       )}
       disabled={!canScrollPrev}
@@ -229,7 +229,7 @@ const CarouselNext = React.forwardRef<
       variant={variant}
       size={size}
       className={cn(
-        "absolute bottom-5 lg:right-[48%] md:right-[45%] transform translate-x-1/2 rounded-full",
+        "absolute bottom-5 lg:right-[48%] md:right-[48%] transform translate-x-1/2 rounded-full hidden md:block lg:block justify-items-center",
         className
       )}
       disabled={!canScrollNext}

@@ -17,7 +17,7 @@ const ProductsPage = () => {
   return (
     <Layout>
       <section className="flex flex-col flex-grow w-full">
-        <div className="flex-grow px-24 my-7 lg:space-y-7 md:space-y-5">
+        <div className="flex-grow px-12 sm:px-12 lg:px-24 my-7 lg:space-y-7 md:space-y-5 space-y-4">
           <BannerProduct />
           <Filter onSearch={handleSearch} />
           <ProductContainer filters={filters} page={page} />

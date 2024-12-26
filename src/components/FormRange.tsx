@@ -32,11 +32,11 @@ const FormRange = (props: propsRange) => {
           step={step}
           onValueChange={handleSliderChange}
         />
-        <div className="flex justify-between text-sm">
-          <p>
+        <div className="flex justify-between">
+          <p className="lg:text-sm md:text-sm text-xs">
             Min: <span>Rp. 0</span>
           </p>
-          <p>
+          <p className="lg:text-sm md:text-sm text-xs">
             Max: <span>{formatPrice(maxPrice.toString())}</span>
           </p>
         </div>

@@ -12,7 +12,7 @@ const FormCheckbox = (props: propsCheckbox) => {
 
   return (
     <div className="rounded-md p-2 flex flex-col justify-center items-center text-center space-y-1.5">
-      <p className="text-sm font-medium">{label}</p>
+      <p className="lg:text-sm md:text-sm text-xs font-medium">{label}</p>
       <Checkbox name={name} checked={checked} onChange={onChange} />
     </div>
   );

@@ -93,38 +93,42 @@ const DetailProduct = () => {
 
   return (
     <Layout>
-      <section className="flex flex-col flex-grow w-full">
-        <div className="flex-grow px-24 my-7 space-y-5">
-          <div className="flex font-light space-x-1">
-            <Link to="/">
-              <h4 className="text-[#2B2B2B] dark:text-[#bfbfbb]">Home</h4>
-            </Link>
-            <ChevronRight />
-            <Link to="/products">
-              <h4 className="text-[#2B2B2B] dark:text-[#bfbfbb]">Products</h4>
-            </Link>
-          </div>
-
-          <div className="grid lg:grid-cols-2 md:grid-cols-1 md:space-y-5">
+      <section className="flex flex-col flex-grow w-full mb-7">
+        <div className="flex my-7 px-12 sm:px-12 lg:px-24 justify-start items-center">
+          <Link to="/">
+            <h4 className="text-[#2B2B2B] dark:text-[#bfbfbb] font-medium md:font-light lg:text-base md:text-sm text-xs">
+              Home
+            </h4>
+          </Link>
+          <ChevronRight />
+          <Link to="/products">
+            <h4 className="text-[#2B2B2B] dark:text-[#bfbfbb] font-medium md:font-light lg:text-base md:text-sm text-xs">
+              Products
+            </h4>
+          </Link>
+        </div>
+        <div className="flex flex-grow px-12 sm:px-12 lg:px-24 justify-center items-center">
+          <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-4">
             <div className="flex justify-center items-center">
               <img
                 src={product?.attributes.image}
                 alt={product?.attributes.title}
-                className="lg:w-96 lg:h-full md:w-full md:h-96 object-cover rounded-lg"
+                className="lg:w-96 lg:h-96 md:w-72 md:h-72 sm:w-56 sm:h-56 sm object-cover rounded-lg"
               />
             </div>
-            <div className="space-y-5">
+
+            <div className="space-y-4 flex flex-col justify-center items-start">
               <div className="space-y-1">
-                <h1 className="font-medium text-lg text-[#2B2B2B] dark:text-[#FAFAFA]">
+                <h1 className="font-normal md:text-sm text-xs text-[#2B2B2B] dark:text-[#FAFAFA]">
                   {product?.attributes.title}
                 </h1>
-                <p className="font-semibold text-2xl text-[#2B2B2B] dark:text-[#FAFAFA]">
+                <p className="lg:font-semibold lg:text-2xl md:font-medium md:text-xl font-medium text-lg text-[#2B2B2B] dark:text-[#FAFAFA]">
                   {formatPrice(product?.attributes.price)}
                 </p>
               </div>
 
               <div className="space-y-1">
-                <h1 className="font-medium text-base text-[#2B2B2B] dark:text-[#FAFAFA]">
+                <h1 className="text-[#2B2B2B] dark:text-[#FAFAFA]font-normal md:text-sm text-xs">
                   Choose Color
                 </h1>
                 <div className="flex items-center space-x-2 cursor-pointer ">
@@ -144,15 +148,15 @@ const DetailProduct = () => {
               </div>
 
               <div>
-                <div className="font-medium text-base text-[#2B2B2B] dark:text-[#FAFAFA]">
+                <div className="text-[#2B2B2B] dark:text-[#FAFAFA] font-normal md:text-sm text-xs">
                   Description Product
                 </div>
-                <p className="font-normal text-sm text-[#2B2B2B] dark:text-[#bfbfbb] leading-relaxed mt-1">
+                <p className="text-[#2B2B2B] dark:text-[#bfbfbb] leading-relaxed mt-1 font-light lg:text-sm md:text-sm text-xs">
                   {product?.attributes.description}
                 </p>
               </div>
 
-              <div className="flex justify-end items-end space-x-2">
+              <div className="flex justify-end w-full space-x-2">
                 <Select
                   onValueChange={(value) => setAmount(Number(value))}
                   defaultValue="1"
@@ -169,7 +173,7 @@ const DetailProduct = () => {
                   </SelectContent>
                 </Select>
                 <Button
-                  className="bg-[#FABD05] hover:bg-[#FABD05]/80 text-[#2B2B2B] shadow-none"
+                  className="bg-[#FABD05] hover:bg-[#FABD05]/80 text-[#2B2B2B] shadow-none font-normal md:text-sm text-xs"
                   onClick={addToCart}
                 >
                   Add to Cart

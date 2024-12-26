@@ -64,7 +64,7 @@ const FeaturedProducts = () => {
                         text={product.attributes.title}
                         className="text-[#2B2B2B] dark:text-[#FAFAFA]"
                       />
-                      <h3 className="font-medium lg:text-base md:text-sm">
+                      <h3 className="font-medium text-lg">
                         {formatPrice(product.attributes.price)}
                       </h3>
                     </div>
@@ -72,7 +72,7 @@ const FeaturedProducts = () => {
                 </article>
               </Link>
             ))}
-        <div className="flex flex-col justify-center items-end py-5 md:px-5">
+        <div className="hidden lg:flex flex-col justify-center items-end py-5 md:px-5">
           <SecondTitle
             text="Crafted with"
             className="text-[#2B2B2B] dark:text-[#FAFAFA]"

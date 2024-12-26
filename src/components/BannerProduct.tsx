@@ -34,7 +34,6 @@ const BannerProduct = () => {
     <Carousel
       plugins={[plugin.current]}
       className="w-full"
-      onMouseEnter={plugin.current.stop}
       onMouseLeave={plugin.current.reset}
     >
       <CarouselContent>
@@ -45,12 +44,12 @@ const BannerProduct = () => {
                 <img
                   src={product.attributes.image}
                   alt={product.attributes.title}
-                  className="w-full h-full object-cover transition-opacity duration-500 ease-in-out" // Animasi transisi untuk gambar
+                  className="w-full h-full object-cover transition-opacity duration-500 ease-in-out"
                 />
               </figure>
             </div>
 
-            <figcaption className="absolute bg-[#FAFAFA]/75 dark:bg-[#242322]/75 rounded-tl-lg rounded-bl-lg lg:h-56 lg:w-80 md:h-52 md:w-60 flex flex-col justify-center items-center right-0 top-1/2 transform -translate-y-1/2">
+            <figcaption className="absolute bg-[#FAFAFA]/75 dark:bg-[#242322]/75 rounded-tl-lg rounded-bl-lg lg:h-56 lg:w-80 md:h-52 md:w-60 w-52 h-52 flex flex-col justify-center items-center right-0 top-1/2 transform -translate-y-1/2">
               <div className="space-y-1 text-[#2B2B2B] dark:text-[#FAFAFA]">
                 <h2 className="font-semibold lg:text-4xl md:text-xl">
                   Get Discount

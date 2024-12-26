@@ -19,7 +19,7 @@ const ProductContainer = ({
 
   async function fetchAllProduct() {
     try {
-      const params = { ...filters, page, limit: 10 }; // Add pagination and filters
+      const params = { ...filters, page, limit: 10 };
       const result = await getAllProducts(params);
       const response = result.data;
       setAllProduct(response);
@@ -35,7 +35,7 @@ const ProductContainer = ({
   }
 
   useEffect(() => {
-    fetchAllProduct(); // Re-fetch products when filters or page change
+    fetchAllProduct();
   }, [filters, page]);
 
   return (

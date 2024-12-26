@@ -10,10 +10,7 @@ const AreaText = (props: AreaTextProps) => {
 
   return (
     <div
-      className={cn(
-        "font-normal lg:text-sm md:text-xs text-[#FAFAFA]",
-        className
-      )}
+      className={cn("font-normal md:text-sm text-xs text-[#FAFAFA]", className)}
     >
       {text}
     </div>

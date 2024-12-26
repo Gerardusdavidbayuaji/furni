@@ -13,7 +13,7 @@ interface propsSelect {
   list: { value: string; label: string }[];
   value?: string;
   onValueChange?: (value: string) => void;
-  defaultValue: string;
+  defaultValue?: string;
 }
 
 const FormSelect = (props: propsSelect) => {
@@ -22,7 +22,10 @@ const FormSelect = (props: propsSelect) => {
   return (
     <div className="rounded-md p-2 flex justify-start items-center text-center text-[#2B2B2B]">
       <div className="grid w-full max-w-sm gap-1.5">
-        <Label htmlFor={name} className="text-left">
+        <Label
+          htmlFor={name}
+          className="text-left lg:text-sm md:text-sm text-xs"
+        >
           {label}
         </Label>
         <Select value={value} onValueChange={onValueChange}>
