@@ -1,3 +1,6 @@
+import tailwindcssAnimate from "tailwindcss-animate";
+import aspectRatio from "@tailwindcss/aspect-ratio";
+
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ["class"],
@@ -13,10 +16,6 @@ export default {
         inter: "Inter, sans-serif",
         poppins: "Poppins, sans-serif",
       },
-      // flexGrow: {
-      //   2: 0,
-      //   1: 1,
-      // },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -61,8 +60,5 @@ export default {
       },
     },
   },
-  plugins: [
-    require("tailwindcss-animate"),
-    require("@tailwindcss/aspect-ratio"),
-  ],
+  plugins: [tailwindcssAnimate, aspectRatio],
 };
