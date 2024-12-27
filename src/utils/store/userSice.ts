@@ -21,12 +21,10 @@ const userSlice = createSlice({
         token: action.payload.jwt,
       };
       localStorage.setItem("user", JSON.stringify(state.user));
-      console.log(action.payload);
     },
 
     logoutUser: (state) => {
       state.user = null;
-      console.log("logout");
       localStorage.removeItem("user");
     },
   },

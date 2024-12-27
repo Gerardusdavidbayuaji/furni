@@ -1,26 +1,26 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-interface Order {
-  id: string;
-  products: any[];
-  totalAmount: number;
-  paymentDate: string;
-}
+import { IOrder } from "../apis/products";
 
 interface OrderState {
-  orders: Order[];
+  orders: IOrder[];
 }
 
+const getOrdersFromLocalStorage = (): IOrder[] => {
+  const orders = localStorage.getItem("orders");
+  return orders ? JSON.parse(orders) : [];
+};
+
 const initialState: OrderState = {
-  orders: [],
+  orders: getOrdersFromLocalStorage(),
 };
 
 const orderSlice = createSlice({
   name: "order",
   initialState,
   reducers: {
-    addOrder(state, action: PayloadAction<Order>) {
+    addOrder(state, action: PayloadAction<IOrder>) {
       state.orders.push(action.payload);
+      localStorage.setItem("orders", JSON.stringify(state.orders));
     },
   },
 });

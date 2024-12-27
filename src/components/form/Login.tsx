@@ -3,9 +3,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useDispatch } from "react-redux";
 import { toast } from "@/hooks/use-toast";
 
-import { loginAccount } from "@/utils/apis/user";
 import { LoginSchema, loginSchema } from "@/utils/apis/user/type";
 import { loginUser } from "@/utils/store/userSice";
+import { loginAccount } from "@/utils/apis/user";
 
 import { CustomFormField } from "../CustomFormField";
 import CustomButton from "../CustomButton";
@@ -14,6 +14,7 @@ import { Form } from "../ui/form";
 
 const Login = () => {
   const dispatch = useDispatch();
+
   const form = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -33,9 +34,8 @@ const Login = () => {
       });
     } catch (error: any) {
       const errorMessage = error.details?.errors?.[0]?.message || error.message;
-
       toast({
-        title: "Oops, something went wrong!",
+        title: "Oops, something went wrong.",
         description: errorMessage,
         variant: "destructive",
       });
@@ -45,14 +45,19 @@ const Login = () => {
   return (
     <>
       <div className="text-[#2B2B2B] dark:text-[#FAFAFA] flex flex-col justify-center items-center space-y-1">
-        <h1 className="font-semibold text-2xl">Ayo Login dan Mulai Belanja</h1>
-        <p className="text-[#2B2B2B]/70 dark:text-[#bfbfbb] font-normal text-base">
-          Masuk untuk melanjutkan belanja kebutuhan Anda.
+        <h1 className="font-semibold text-base md:text-xl lg:text-2xl">
+          Please come in and begin your shopping.
+        </h1>
+        <p className="text-[#2B2B2B]/70 dark:text-[#bfbfbb] font-normal text-xs md:text-sm lg:text-base">
+          Step inside and experience the joy of shopping today.
         </p>
       </div>
 
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmitLogin)} className="space-y-8">
+        <form
+          onSubmit={form.handleSubmit(onSubmitLogin)}
+          className="space-y-2 md:space-y-5 lg:space-y-8 mt-2"
+        >
           <CustomFormField
             control={form.control}
             name="identifier"

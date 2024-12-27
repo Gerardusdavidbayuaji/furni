@@ -87,9 +87,7 @@ const DetailProduct = () => {
   const cartItems = useSelector(
     (state: RootState) => state.cartState.cartItems
   );
-  useEffect(() => {
-    console.log("cart item:", cartItems);
-  }, [cartItems]);
+  useEffect(() => {}, [cartItems]);
 
   return (
     <Layout>

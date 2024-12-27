@@ -277,3 +277,38 @@
 // };
 
 // export default ProductContainer;
+
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
+interface IOrder {
+  id: string;
+  products: any[];
+  totalAmount: number;
+  paymentDate: string;
+}
+
+const getOrderFromLocalStorage = (): IOrder[] => {
+  return JSON.parse(localStorage.getItem("order") || "[]");
+};
+
+interface OrderState {
+  orders: IOrder[];
+}
+
+const initialState: OrderState = {
+  orders: getOrderFromLocalStorage(),
+};
+
+const orderSlice = createSlice({
+  name: "order",
+  initialState,
+  reducers: {
+    addOrder(state, action: PayloadAction<IOrder>) {
+      state.orders.push(action.payload);
+      localStorage.setItem("order", JSON.stringify(state.orders));
+    },
+  },
+});
+
+export const { addOrder } = orderSlice.actions;
+export default orderSlice.reducer;

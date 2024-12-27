@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { getAllProducts } from "@/utils/apis/products/api";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "./ui/button";
+import { toast } from "@/hooks/use-toast";
 
 const Pagination = ({
   currentPage,
@@ -21,8 +22,12 @@ const Pagination = ({
     try {
       const response = await getAllProducts(params);
       setProducts(response.data);
-    } catch (error) {
-      console.log("error fetching products", error);
+    } catch (error: any) {
+      toast({
+        title: "Oops! Something went wrong.",
+        description: error.toString(),
+        variant: "destructive",
+      });
     }
   };
 

@@ -24,13 +24,14 @@ const Hero = () => {
             <p className="text-[#FAFAFA] font-normal md:font-light lg:text-base md:text-sm text-xs mb-4">
               Ut enim ad minim veniam, quis nostrud exercitation ullamco
             </p>
-            <Button className="bg-[#F5C02F] hover:bg-[#F5C02F]/80 text-[#2B2B2B] rounded-full lg:w-24 md:w-20 md:mb-8 md:text-sm">
-              <Link to="/products">
-                <p className="text-[#2B2B2B] text-xs md:text-sm lg:text-base font-normal">
-                  Explore
-                </p>
-              </Link>
-            </Button>
+            <Link
+              to="/products"
+              className="text-[#2B2B2B] text-xs md:text-sm lg:text-base font-normal"
+            >
+              <Button className="bg-[#F5C02F] hover:bg-[#F5C02F]/80 text-[#2B2B2B] rounded-full lg:w-24 md:w-20 md:mb-8 md:text-sm">
+                Explore
+              </Button>
+            </Link>
           </div>
           <div className="hidden lg:flex items-center justify-end">
             <img

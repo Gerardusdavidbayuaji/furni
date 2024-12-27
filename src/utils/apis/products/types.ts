@@ -58,3 +58,12 @@ export interface CartState {
   tax: number;
   orderTotal: number;
 }
+
+export interface IOrder {
+  cartItems: ICartItem[];
+  numItemsInCart: number;
+  cartTotal: number;
+  shipping: number;
+  tax: number;
+  orderTotal: number;
+}

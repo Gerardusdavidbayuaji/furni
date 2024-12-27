@@ -24,7 +24,7 @@ const CustomButton = (props: propsButton) => {
       type="submit"
       onClick={handleSubmit}
       className={cn(
-        "w-full bg-[#778F86] shadow-none hover:bg-[#778F86]/80 text-[#FAFAFA]",
+        "w-full bg-[#778F86] shadow-none hover:bg-[#778F86]/80 text-[#FAFAFA] text-xs lg:text-base md:text-sm",
         className
       )}
       disabled={isSubmitting}

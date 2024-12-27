@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import dayjs from "dayjs";
 
 import { removeSingleProductForOrder } from "@/utils/store/cartSlice";
 import { removeAllProductForOrder } from "@/utils/store/cartSlice";
@@ -11,7 +12,6 @@ import { formatPrice } from "@/utils/formatter";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 import Auth from "@/pages/auth/auth";
 import { Button } from "./ui/button";
-import dayjs from "dayjs";
 
 const CartTotal = () => {
   const { user } = useSelector((state: RootState) => state.userState);
@@ -56,7 +56,7 @@ const CartTotal = () => {
       <h1 className="text-xs lg:text-sm md:text-sm mt-1">Shopping Summary</h1>
       <div className=" space-y-2">
         <div className="flex justify-between font-normal md:text-sm text-xs">
-          <h2>Sub total</h2>
+          <h2>Total</h2>
           <p className="font-normal md:text-sm text-xs">
             {formatPrice(cartTotal)}
           </p>
@@ -90,15 +90,16 @@ const CartTotal = () => {
               <div className="flex flex-col justify-between">
                 <div>
                   <h1 className="font-semibold text-lg lg:text-2xl md:text-xl">
-                    Total Pesanan Anda
+                    Total Amount of Your Order
                   </h1>
                   <p className="text-[#2B2B2B]/70 dark:text-[#bfbfbb] font-normal text-sm lg:text-base">
-                    Cek total belanja Anda sebelum melanjutkan ke pembayaran
+                    Please review your total shopping amount before proceeding
+                    to payment.
                   </p>
                 </div>
                 <div className="space-y-2">
                   <div className="flex justify-between font-normal md:text-sm text-xs">
-                    <h2>Sub total</h2>
+                    <h2>Total</h2>
                     <p className="font-normal md:text-sm text-xs">
                       {formatPrice(cartTotal)}
                     </p>
@@ -126,17 +127,17 @@ const CartTotal = () => {
                   className="w-full bg-[#F5C02F] shadow-none hover:bg-[#F5C02F]/80 text-[#2B2B2B]"
                   onClick={handlePayment}
                 >
-                  Bayar Sekarang
+                  Pay Now
                 </Button>
               </div>
             </DialogContent>
           ) : (
             <DialogContent className="w-2/5 h-[350px] mx-auto">
               <div className="flex flex-col justify-center text-center space-y-1">
-                <h1 className="font-semibold text-2xl">Pembayaran Berhasil</h1>
+                <h1 className="font-semibold text-2xl">Payment Successful</h1>
                 <p className="text-[#2B2B2B]/70 dark:text-[#bfbfbb] font-normal text-base">
-                  Terima kasih telah berbelanja! Pembayaran Anda telah diproses
-                  dengan sukses.
+                  Thanks for shopping! Your payment has been processed
+                  successfully.
                 </p>
               </div>
             </DialogContent>
@@ -156,8 +157,8 @@ const CartTotal = () => {
                   Transform Your Space with Elegant Furniture.
                 </h1>
                 <p className="text-[#2B2B2B] dark:text-[#bfbfbb] font-normal text-base mt-1">
-                  Bawa kenyamanan ke rumah Anda dengan koleksi furnitur terbaru
-                  kami.
+                  Bring comfort to your home with our latest furniture
+                  collection.
                 </p>
               </div>
               <div className="bg-[#DFE6E6] dark:bg-[#242322] p-5 space-y-5 overflow-auto touch-pan-y rounded-lg">

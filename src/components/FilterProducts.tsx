@@ -82,8 +82,6 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
     onSearch(resetFilters);
   };
 
-  console.log("filter product cek", filters);
-
   const handleChange = (field: string, value: any) => {
     const updatedFilters = { ...filters, [field]: value };
     setFilters(updatedFilters);
@@ -91,8 +89,6 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
     if (field === "search" || field === "freeShipping" || field === "sort") {
       onSearch(updatedFilters);
     }
-
-    console.log("filter", updatedFilters);
   };
 
   return (

@@ -6,7 +6,7 @@ import Login from "@/components/form/Login";
 const Auth = () => {
   const [isLoginForm, setIsLoginForm] = useState(true);
 
-  const toggleForm = () => {
+  const toggleAuthForm = () => {
     setIsLoginForm((prev) => !prev);
   };
 
@@ -16,20 +16,20 @@ const Auth = () => {
         <div>
           <Login />
           <button
-            onClick={toggleForm}
-            className="text-[#2B2B2B] dark:text-[#FAFAFA] bg-transparent hover:bg-transparent flex justify-center font-normal text-sm lg:text-base shadow-none mt-2 w-full"
+            onClick={toggleAuthForm}
+            className="text-[#2B2B2B] dark:text-[#FAFAFA] bg-transparent hover:bg-transparent flex justify-center font-normal text-xs md:text-sm lg:text-base shadow-none mt-2 w-full"
           >
-            Belum memiliki akun? Silakan klik disini!
+            If you don't have an account yet, please click here.
           </button>
         </div>
       ) : (
         <div>
           <Register />
           <button
-            onClick={toggleForm}
-            className="text-[#2B2B2B] dark:text-[#FAFAFA] bg-transparent hover:bg-transparent flex justify-center font-normal text-sm lg:text-base shadow-none mt-2 w-full"
+            onClick={toggleAuthForm}
+            className="text-[#2B2B2B] dark:text-[#FAFAFA] bg-transparent hover:bg-transparent flex justify-center font-normal text-xs md:text-sm lg:text-base shadow-none mt-2 w-full"
           >
-            Sudah memiliki akun? Silakan klik disini!
+            If you already have an account, please click here.
           </button>
         </div>
       )}
