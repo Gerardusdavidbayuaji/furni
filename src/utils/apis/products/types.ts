@@ -60,10 +60,8 @@ export interface CartState {
 }
 
 export interface IOrder {
-  cartItems: ICartItem[];
-  numItemsInCart: number;
-  cartTotal: number;
-  shipping: number;
-  tax: number;
-  orderTotal: number;
+  id: string;
+  products: ICartItem[];
+  totalAmount: number;
+  paymentDate: string;
 }
