@@ -10,7 +10,7 @@ const SkeletonFeaturedProducts = () => {
         </div>
         <div className="flex flex-col justify-center items-center h-auto my-2">
           <Skeleton className="text-[#2B2B2B] dark:text-[#FAFAFA]" />
-          <Skeleton className="font-medium lg:text-base md:text-sm" />
+          <Skeleton className="font-medium text-lg" />
         </div>
       </Card>
     </article>

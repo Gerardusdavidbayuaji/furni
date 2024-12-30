@@ -9,7 +9,7 @@ import { toast } from "@/hooks/use-toast";
 import { Button } from "./ui/button";
 import { Card } from "./ui/card";
 
-import SkeletonFeaturedProducts from "./SkeletonFeaturedProducts";
+import SkeletonFeaturedProducts from "./SkeletonFeaturedProduct";
 import SecondTitle from "./SecondTitle";
 import AreaText from "./AreaText";
 
@@ -17,10 +17,10 @@ const FeaturedProducts = () => {
   const [featuredProducts, setFeaturedProducts] = useState<IProducts["data"]>(
     []
   );
-  const [isloading, setIsloading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   async function fetchFeaturedProducts() {
-    setIsloading(true);
+    setLoading(true);
     try {
       const result = await getFeaturedProducts();
       const response = result.data;
@@ -32,7 +32,7 @@ const FeaturedProducts = () => {
         variant: "destructive",
       });
     } finally {
-      setIsloading(false);
+      setLoading(false);
     }
   }
 
@@ -43,7 +43,7 @@ const FeaturedProducts = () => {
   return (
     <>
       <div className="grid lg:grid-cols-4 md:grid-cols-2 h-full">
-        {isloading
+        {loading
           ? Array.from({ length: 3 }).map((_, index) => (
               <SkeletonFeaturedProducts key={index} />
             ))
