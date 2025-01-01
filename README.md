@@ -1,50 +1,53 @@
-# React + TypeScript + Vite
+# Furni
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<div align="center" width="100%">
+   <img src="public/assets/hero-section.png" alt="Real Estate">
+</div>
 
-Currently, two official plugins are available:
+## Introduction
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Furni is the platform that revolutionizes the way you purchase furniture, making transactions effortless and efficient..
 
-## Expanding the ESLint configuration
+Click [_here_](https://furni-sigma.vercel.app/) for result.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Features
 
-- Configure the top-level `parserOptions` property like this:
+- **Modern Stack**: Built with React.js, a powerful library, TailwindCSS and Shadcn/ui for responsive and elegant styling.
+- **Responsive Design**: Ensure a seamless experience across various devices and screen sizes.
+- **Huge selections of Furniture**: Discover your dream furniture.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+## ⚙️ Tech Stack
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- React Js
+- Tailwind CSS
+- Shadcn/ui
+- Redux
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## Installation
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+1. Clone this repository to your local machine using:
+
+   ```bash
+   git clone https://github.com/Gerardusdavidbayuaji/furni.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd furni
+   ```
+
+3. Install the dependencies:
+
+   ```bash
+   npm install
+   ```
+
+## Usage
+
+1. Configure your database settings in the .env file.
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+3. Access the application in your browser at http://localhost:5173.
