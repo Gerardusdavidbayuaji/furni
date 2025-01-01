@@ -1,47 +1,50 @@
 import { useEffect, useState } from "react";
 import { toast } from "@/hooks/use-toast";
 import { Link } from "react-router-dom";
+
 import { getAllProducts } from "@/utils/apis/products/api";
 import { IProducts } from "@/utils/apis/products";
 import { formatPrice } from "@/utils/formatter";
+
+import SkeletonCardProduct from "./SkeletonCardProduct";
 import { Card } from "@/components/ui/card";
 import AreaText from "./AreaText";
 
-const ProductContainer = ({
-  filters,
-  page,
-}: {
+interface propsProductContainer {
   filters: any;
   page: number;
-}) => {
+}
+
+const ProductContainer = ({ filters, page }: propsProductContainer) => {
   const [allProduct, setAllProduct] = useState<IProducts["data"]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  async function fetchAllProduct() {
-    try {
-      const params = { ...filters, page, limit: 10 };
-      const result = await getAllProducts(params);
-      const response = result.data;
-      setAllProduct(response);
-    } catch (error: any) {
-      toast({
-        title: "Oops! Something went wrong.",
-        description: error.toString(),
-        variant: "destructive",
-      });
-    } finally {
-      setIsLoading(false);
-    }
-  }
-
   useEffect(() => {
+    const fetchAllProduct = async () => {
+      try {
+        setIsLoading(true);
+        const params = { ...filters, page, limit: 10 };
+        const result = await getAllProducts(params);
+        const response = result.data;
+        setAllProduct(response);
+      } catch (error: any) {
+        toast({
+          title: "Oops! Something went wrong.",
+          description: error.toString(),
+          variant: "destructive",
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
     fetchAllProduct();
   }, [filters, page]);
 
   return (
     <>
       {isLoading ? (
-        <div className="text-center">Loading Products . . .</div>
+        <SkeletonCardProduct count={allProduct.length} />
       ) : allProduct.length === 0 ? (
         <div className="text-center text-xl font-medium">
           No products found. Please check back later!

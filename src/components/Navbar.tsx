@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -7,7 +8,6 @@ import { LucideShoppingCart } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import DropDown from "./CustomDropDown";
 import NavLinks from "./NavLinks";
-import { useEffect, useState } from "react";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -48,7 +48,7 @@ const Navbar = () => {
         isVisible ? "translate-y-0" : "-translate-y-full"
       } ${isScrolled ? "bg-[#395C4E]/80 backdrop-blur-md" : "bg-[#395C4E]"}`}
     >
-      <nav className="px-12 sm:px-12 lg:px-24 py-3 sm:py-3 md:py-4 lg:py-4 mx-auto flex justify-between items-center text-[#FAFAFA]">
+      <nav className="px-12 sm:px-12 lg:px-24 py-3 sm:py-3 md:py-4 lg:py-5 mx-auto flex justify-between items-center text-[#FAFAFA]">
         <Link to="/">
           <h1 className="text-xl md:text-4xl font-normal cursor-pointer">
             Furni.
