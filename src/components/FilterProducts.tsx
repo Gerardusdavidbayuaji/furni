@@ -70,13 +70,22 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
     fetchData();
   }, []);
 
-  // const handleSearch = () => {
-  //   onSearch(filters);
-  // };
-
   const handleSearch = () => {
     onSearch(filters);
   };
+
+  // const handleSearch = () => {
+  //   const updatedFilters = {
+  //     ...filters,
+  //     search: filters.search,
+  //     categories: filters.category,
+  //     companies: filters.company,
+  //     shipping: filters.freeShipping ? "true" : "false",
+  //     price: filters.price,
+  //     sort: filters.sort,
+  //   };
+  //   onSearch(updatedFilters);
+  // };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFilters({
@@ -159,12 +168,7 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
             label="Free Shipping"
             name="free-shipping"
             checked={filters.freeShipping}
-            onChange={(e) =>
-              handleChange(
-                "freeShipping",
-                (e.target as HTMLInputElement).checked
-              )
-            }
+            onChange={(checked) => handleChange("freeShipping", checked)}
           />
           <div className="rounded-md p-2 flex justify-center items-center text-center">
             <Button
