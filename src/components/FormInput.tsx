@@ -11,7 +11,7 @@ interface propsSearch {
 }
 
 const FormInput = (props: propsSearch) => {
-  const { id, name, label, defaultValue } = props;
+  const { id, value, name, label, defaultValue, onChange } = props;
 
   return (
     <div className="rounded-md p-2 flex justify-start items-center text-center">
@@ -25,7 +25,9 @@ const FormInput = (props: propsSearch) => {
         <Input
           type={name}
           id={id}
+          value={value}
           placeholder={defaultValue}
+          onChange={onChange}
           className="h-[39px] rounded-lg outline outline-1 outline-[#778F86] focus:outline-2 focus:outline-[#778F86]"
         />
       </div>

@@ -70,6 +70,10 @@ const Filter = ({ onSearch }: { onSearch: (filters: any) => void }) => {
     fetchData();
   }, []);
 
+  // const handleSearch = () => {
+  //   onSearch(filters);
+  // };
+
   const handleSearch = () => {
     onSearch(filters);
   };

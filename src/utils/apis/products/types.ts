@@ -1,16 +1,16 @@
 export interface ProductAttributes {
-  title: string;
-  company: string;
-  description: string;
-  featured: true;
-  createdAt: string;
-  updatedAt: string;
-  publishedAt: string;
-  category: string;
-  image: string;
-  price: string;
-  shipping: string;
-  colors: string[];
+  title?: string;
+  company?: string;
+  description?: string;
+  featured?: true;
+  createdAt?: string;
+  updatedAt?: string;
+  publishedAt?: string;
+  category?: string;
+  image?: string;
+  price?: string;
+  shipping?: string;
+  colors?: string[];
 }
 
 export interface Product {

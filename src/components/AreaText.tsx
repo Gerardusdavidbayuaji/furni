@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 
 interface AreaTextProps {
-  text: string;
+  text: any;
   className?: string;
 }
 
