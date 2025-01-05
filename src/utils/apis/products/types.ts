@@ -10,7 +10,7 @@ export interface ProductAttributes {
   image?: string;
   price?: string;
   shipping?: string;
-  colors?: string[];
+  colors: string[];
 }
 
 export interface Product {
