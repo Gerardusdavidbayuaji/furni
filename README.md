@@ -8,7 +8,7 @@
 
 Furni is the platform that revolutionizes the way you purchase furniture, making transactions effortless and efficient..
 
-Click [_here_](https://furni-sigma.vercel.app/) for result.
+Click [_here_](https://furni-sigma.vercel.app/) for result and prototype [_here_](https://www.behance.net/gallery/217178663/Furni?).
 
 ## Features
 
